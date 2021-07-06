@@ -9,6 +9,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
+    idRawg: {
+      type: DataTypes.INTEGER,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -21,6 +24,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     rating: {
+      type: DataTypes.FLOAT
+    },
+    imgUrl: {
       type: DataTypes.STRING
     }
   });

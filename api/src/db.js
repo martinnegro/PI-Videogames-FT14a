@@ -5,6 +5,8 @@ const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
+const { dbLoad } = require('./dbLoad');
+
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -40,6 +42,9 @@ Platform.belongsToMany(Videogame, { through: 'videogameplatform' });
 
 Videogame.belongsToMany(Genre, { through: 'videogamegenre' });
 Genre.belongsToMany(Videogame, { through: 'videogamegenre' });
+
+// Se pasan los modelos como parámtros ya que no se pueden hacer exports circulares
+dbLoad(Videogame, Genre, Platform);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
