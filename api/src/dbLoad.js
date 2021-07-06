@@ -33,7 +33,7 @@ function dbLoad( Videogame, Genre, Platform ) {
           console.log('Plataformas cargadas'); 
         }).then(async () => {
           for (let i = 1; i <= 3; i++) { 
-            let response = await axios.get(`${API_URL_GAMES}${API_KEY}&page=${i}`)
+            let response = await axios.get(`${API_URL_GAMES}${API_KEY}&page=${i}&page_size=40`)
             let result = response.data.results
             for (let j = 0; j < result.length; j++ ) {  // Mismo caso que las plataformas, pero los juegos son 500.000
               const vg = await Videogame.create({       // Por lo que llamo 3 veces para traer los primeros 120 juegos.
@@ -46,7 +46,9 @@ function dbLoad( Videogame, Genre, Platform ) {
                 imgUrl: result[j].background_image
               })
               const platformsIds = result[j].platforms.map( p => p.platform.id)
+              const genresIds    = result[j].genres.map( p => p.id) 
               await vg.addPlatform(platformsIds);
+              await vg.addGenre(genresIds);
             }
           };
           console.log(`Juegos cargados`);
