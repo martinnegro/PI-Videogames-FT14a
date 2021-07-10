@@ -44,7 +44,7 @@ Videogame.belongsToMany(Genre, { through: 'videogamegenre' });
 Genre.belongsToMany(Videogame, { through: 'videogamegenre' });
 
 // Se pasan los modelos como parámtros ya que no se pueden hacer exports circulares
-dbLoad(Videogame, Genre, Platform);
+// dbLoad(Videogame, Genre, Platform);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

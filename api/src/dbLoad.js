@@ -14,7 +14,7 @@ function dbLoad( Videogame, Genre, Platform ) {
               name: response.data.results[i].name
             })
           };
-          console.log('Géneros cargados') 
+          console.log('Géneros cargados');
         })
         .then(async () => { // La idea es traer todas las plataformas a la base de datos.
           let next = true;  // Como el paginado máximo es de 40 items, utilizo el while
@@ -45,8 +45,8 @@ function dbLoad( Videogame, Genre, Platform ) {
                 rating: result[j].rating,
                 imgUrl: result[j].background_image
               })
-              const platformsIds = result[j].platforms.map( p => p.platform.id)
-              const genresIds    = result[j].genres.map( p => p.id) 
+              const platformsIds = result[j].platforms.map( p => p.platform.id);
+              const genresIds    = result[j].genres.map( p => p.id);
               await vg.addPlatform(platformsIds);
               await vg.addGenre(genresIds);
             }
