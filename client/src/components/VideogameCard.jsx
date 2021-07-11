@@ -8,10 +8,10 @@ function VideogameCard({vg}) {
     }
 
     return (
-        <div key={vg.id} className={style.container} style={imgBack}>
+        <div className={style.container} style={imgBack}>
             <div className={style.title}>{vg.name}</div>
             <div className={style.genresContainer}>
-                {vg.genres.map(genre => <div className={style.genres}>{genre.name}</div>)}
+                {vg.genres.map(genre => <div key={genre.id} className={style.genres}>{genre.name}</div>)}
             </div>
         </div>
     )

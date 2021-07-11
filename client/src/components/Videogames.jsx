@@ -1,7 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+// import { Link } from 'react-router-dom';
 
 import VideogameCard from './VideogameCard';
+import Pagination from './Pagination';
 import style from './styles/Videogames.module.scss'
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,16 +10,61 @@ import { getVideogames } from '../redux/actions';
 
 
 const Videogames = function() {
-    
+    // Trae los juegos del redux
     const vgames = useSelector((state) => state.videogames);
     const dispatch = useDispatch();
+    
+    // Controla la paginación 
+    const [ pagination, setPagination ] = useState({
+        paginatedGames: [],
+        elementsPerPage: 10, 
+        currentPage: 1,
+        lastPage: undefined
+    })
+    const indexOfLast  = (pagination.elementsPerPage * pagination.currentPage);
+    const indexOfFirst = (indexOfLast - pagination.elementsPerPage);
+    useEffect(() => {
+        setPagination({
+            ...pagination,
+            paginatedGames: vgames.slice(indexOfFirst, indexOfLast),
+            lastPage: Math.ceil(vgames.length / pagination.elementsPerPage)
+        })
+    },[indexOfFirst, indexOfLast, vgames]);
 
+    function setCurrentPage(e) {
+        if (e.target.value !== undefined){
+            setPagination({
+                ...pagination,
+                currentPage: parseInt(e.target.value)
+            });
+        }
+    };
+    function setElementPerPage(e) {
+        const elementsPerPage = parseInt(e.target.value);
+        let currentPage = pagination.currentPage;
+        let newLast = Math.ceil(vgames.length / elementsPerPage);
+        if (e.target.value !== undefined){
+            if (pagination.currentPage > newLast ) currentPage = newLast;
+            setPagination({
+                ...pagination,
+                elementsPerPage,
+                currentPage
+            })
+            
+        }
+    }
+    
     return (
         <>
             <input type='button' value='Cargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
+            <Pagination 
+                setCurrentPage={setCurrentPage} 
+                setElementPerPage={setElementPerPage}
+                pagination={pagination}
+            />
             <div className={style.container}>
-            {vgames.map(vg => 
-                (<VideogameCard vg={vg}/>)
+            {pagination.paginatedGames.map(vg => 
+                (<VideogameCard key={vg.id} vg={vg}/>)
             )}
             </div>
         </>
