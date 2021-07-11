@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const { Op } = require("sequelize");
-const { Videogame } = require('../db');
+const { Videogame, Genre } = require('../db');
 const axios = require('axios');
 require('dotenv').config();
 const { v4: uuidv4 } = require('uuid');
@@ -17,7 +17,10 @@ router.get('/', async (req, res) => {
     if (!name) {
         const vgs = await Videogame.findAll({
             attributes: ['id','idRawg','name','rating','imgUrl'],
-            include: {association: 'genres'}
+            include: { 
+                model: Genre,
+                through: { attributes: [] } 
+             }
         });
         res.json(vgs);
     } else {
@@ -47,6 +50,10 @@ router.get('/', async (req, res) => {
                     }
                 });
                 if (created) vgs.push(game);
+                const platformsIds = result[i].platforms.map( p => p.platform.id);
+                const genresIds    = result[i].genres.map( p => p.id);
+                await game.addPlatform(platformsIds);
+                await game.addGenre(genresIds);
             };
         }
         res.json(vgs);

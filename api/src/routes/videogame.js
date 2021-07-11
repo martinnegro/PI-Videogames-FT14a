@@ -10,12 +10,19 @@ const { v4: uuidv4 } = require('uuid');
 // Obtener el detalle de un videojuego en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de videojuego
 // Incluir los géneros asociados
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-    const vg = await Videogame.findByPk(id,{
-        include: {association: 'videogamegenres'}
-    });
-    res.json(vg);
+    try {
+        const vg = await Videogame.findByPk(id,{
+            include: [{
+                model: Genre,
+                through: { attributes: [] } 
+            }]
+        });
+        res.json(vg);
+    } catch (err) {
+        next(err)
+    }
 });
 
 
@@ -33,7 +40,6 @@ router.post('/', async (req, res) => {
         imgUrl: imgUrl || null,
     })
     res.json(vg);
-
 });
 
 module.exports = router;
