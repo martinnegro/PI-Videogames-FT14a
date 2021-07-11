@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 import VideogameCard from './VideogameCard';
 import Pagination from './Pagination';
-import style from './styles/Videogames.module.scss'
+import FiltersAndOrder from './FiltersAndOrder'
+import style from './styles/Videogames.module.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getVideogames } from '../redux/actions';
@@ -31,6 +32,7 @@ const Videogames = function() {
         })
     },[indexOfFirst, indexOfLast, vgames]);
 
+
     function setCurrentPage(e) {
         if (e.target.value !== undefined){
             setPagination({
@@ -50,24 +52,25 @@ const Videogames = function() {
                 elementsPerPage,
                 currentPage
             })
-            
         }
     }
     
     return (
-        <>
+        <div className={style.container}>
             <input type='button' value='Cargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
             <Pagination 
                 setCurrentPage={setCurrentPage} 
                 setElementPerPage={setElementPerPage}
                 pagination={pagination}
             />
-            <div className={style.container}>
-            {pagination.paginatedGames.map(vg => 
-                (<VideogameCard key={vg.id} vg={vg}/>)
-            )}
+            <FiltersAndOrder/>
+            
+            <div className={style.vgsContainer}>
+                {pagination.paginatedGames.map(vg => 
+                    (<VideogameCard key={vg.id} vg={vg}/>)
+                )}
             </div>
-        </>
+        </div>
     )
 }
 

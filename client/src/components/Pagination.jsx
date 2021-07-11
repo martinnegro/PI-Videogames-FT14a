@@ -1,19 +1,20 @@
 import React from 'react'
 
-function Pagination({setCurrentPage, setElementPerPage,pagination}) {
-
+function Pagination({setCurrentPage, setElementPerPage, pagination}) {
+    const currentPage = pagination.currentPage;
+    const lastPage = pagination.lastPage;
     const backRed = {
         backgroundColor: 'red'
     }
-
-    const currentPage = pagination.currentPage;
-    const lastPage = pagination.lastPage;
     
     return (
         <div>
-            <select id='elements' name='elements' onChange={setElementPerPage}>
-                <label>Juegos por página</label>
-                <option value='10'>10</option>
+            <label>Juegos por página</label>
+            <select 
+                id='elements' 
+                name='elements'
+                onChange={setElementPerPage}>
+                <option dafaultvalue='10'>10</option>
                 <option value='15'>15</option>
                 <option value='20'>20</option>
                 <option value='25'>25</option>
@@ -37,7 +38,7 @@ function Pagination({setCurrentPage, setElementPerPage,pagination}) {
                     (lastPage - currentPage) < 3 ? <span>..</span> :
                     <input type='button' value={2 + currentPage}/>
                 }
-                <input type='button' value={pagination.lastPage}/>
+                <input type='button' value={pagination.lastPage || 1}/>
             </form>
         </div>
     )
