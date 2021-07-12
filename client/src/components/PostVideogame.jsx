@@ -99,7 +99,7 @@ function PostVideogame() {
                     ))
                 }
             </form>
-            <input type='submit' value='Subir Juego' onSubmit={handleSubmit}/>
+            <input type='submit' value='Subir Juego' onClick={handleSubmit}/>
         </div>
     )
 }
