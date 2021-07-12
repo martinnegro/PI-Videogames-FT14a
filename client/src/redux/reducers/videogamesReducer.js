@@ -1,10 +1,11 @@
 import { 
-    GET_VIDEOGAMES, 
+    GET_VIDEOGAMES,
+     
     ORDER_ALPH,
     ORDER_BY_RATING,
     FILTER_BY_GENRE,
     FILTER_BY_ORIGIN
- } from "./actions";
+ } from "../actions/videogamesActions";
 
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';
@@ -13,10 +14,10 @@ export const DECREMENT = 'DECREMENT';
 const initialState = {
     videogamesCache: [],
     videogames: [],
-    videogame: {},
+    videogame: {}
 }
 
-export default function reducer(state = initialState, action) {
+export default function videogamesReducer(state = initialState, action) {
     let aux;
     switch (action.type) {
         case GET_VIDEOGAMES: 
@@ -44,7 +45,7 @@ export default function reducer(state = initialState, action) {
         case FILTER_BY_GENRE:
             return {
                 ...state,
-                videogames: state.videogamesCache.filter(vg => vg.genres.some(g => g.name === action.payload))
+                videogames: state.videogamesCache.filter(vg => vg.genres.some(g => g.id === action.payload))
             }
         case FILTER_BY_ORIGIN:
             return state;

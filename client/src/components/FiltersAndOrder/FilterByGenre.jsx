@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { filterByGenre } from '../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { filterByGenre } from '../../redux/actions/videogamesActions'
+import { getGenres } from '../../redux/actions/genresActions'
 
 
 function FilterByGenre() {
-    const [ genres, setGenres ] = useState([]);
+    const genres = useSelector(state => state.genresReducer.genres);
+    const dispatch = useDispatch();
     
     useEffect(()=>{
-        axios.get('http://localhost:3001/genres')
-            .then(response => {
-                const res = response.data;
-                setGenres(res);
-            })
-            .catch(err => console.log(err))
+        if (genres.length < 1) dispatch(getGenres());
     },[])
-   
-    const dispatch = useDispatch();
+
     function handleFilter(e) {
             dispatch(filterByGenre(e.target.value))
             e.preventDefault()
@@ -27,8 +23,8 @@ function FilterByGenre() {
             <form onChange={handleFilter}>
                 <label>Filtrado por género:</label>
                 <select>
-                {   genres ?  genres.map(genre => (
-                        <option key={genre.id} value={genre.name}>{genre.name}</option>
+                {   genres.length > 1 ?  genres.map(genre => (
+                        <option key={genre.id} value={genre.id}>{genre.name}</option>
                     )) : 'cargando'
                 }
                 </select>

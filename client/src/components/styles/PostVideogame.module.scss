@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .genresContainer {
+        display: flex;
+        flex-direction: column;
+        
+        border:2px solid #ccc; 
+        width:130px; height: 150px; 
+        overflow-y: scroll;
+        font-size: small; 
+    }
+}

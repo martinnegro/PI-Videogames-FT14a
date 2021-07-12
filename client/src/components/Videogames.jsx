@@ -5,14 +5,14 @@ import VideogameCard from './VideogameCard';
 import Pagination from './Pagination';
 import FiltersAndOrder from './FiltersAndOrder'
 import style from './styles/Videogames.module.scss';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { getVideogames } from '../redux/actions';
+import { getVideogames } from '../redux/actions/videogamesActions';
 
 
 const Videogames = function() {
     // Trae los juegos del redux
-    const vgames = useSelector((state) => state.videogames);
+    
+    const vgames = useSelector((state) => state.videogamesReducer.videogames);
     const dispatch = useDispatch();
     
     // Controla la paginación 

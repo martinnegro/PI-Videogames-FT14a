@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { orderByRating } from '../../redux/actions';
-import { INCREMENT, DECREMENT } from '../../redux/reducer'
+import { orderByRating } from '../../redux/actions/videogamesActions';
+import { INCREMENT, DECREMENT } from '../../redux/reducers/videogamesReducer'
 
 function OrderByRating() {
     const dispatch = useDispatch();

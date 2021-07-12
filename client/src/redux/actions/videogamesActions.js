@@ -8,7 +8,6 @@ export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN';
 
 export function getVideogames() {
     return function (dispatch) {
-        
         return axios.get('http://localhost:3001/videogames')
                     .then(response => dispatch({
                         type: GET_VIDEOGAMES,

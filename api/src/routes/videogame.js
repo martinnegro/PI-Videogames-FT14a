@@ -31,6 +31,7 @@ router.get('/:id', async (req, res, next) => {
 // Crea un videojuego en la base de datos
 router.post('/', async (req, res) => {
     const { name, description, released, rating, imgUrl } = req.body;
+    console.log(req.body);
     const vg = await Videogame.create({
         id: uuidv4(),                           
         name,

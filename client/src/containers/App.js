@@ -5,6 +5,7 @@ import './App.css';
 import NavBar from '../components/NavBar'
 import Home from '../components/Home';
 import Videogames from '../components/Videogames';
+import PostVideogame from '../components/PostVideogame';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Route exact path='/videogames'>
       <Videogames></Videogames>
     </Route>
+    <Route exact path='/postvideogame' component={PostVideogame}/>
     </div>
   );
 }
