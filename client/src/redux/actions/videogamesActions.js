@@ -5,6 +5,7 @@ export const ORDER_ALPH       = 'ORDER_ALPH';
 export const ORDER_BY_RATING  = 'ORDER_BY_RATING'; 
 export const FILTER_BY_GENRE  = 'FILTER_BY_GENRE';
 export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN';
+export const FILTER_BY_WORD   = 'FILTER_BY_WORD';
 
 export function getVideogames() {
     return function (dispatch) {
@@ -33,6 +34,13 @@ export function orderByRating(payload) {
 export function filterByGenre(payload) {
     return {
         type: FILTER_BY_GENRE,
+        payload
+    }
+}
+
+export function filterByWord(payload) {
+    return {
+        type: FILTER_BY_WORD,
         payload
     }
 }

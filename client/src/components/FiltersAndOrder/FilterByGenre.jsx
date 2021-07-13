@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByGenre } from '../../redux/actions/videogamesActions'
 import { getGenres } from '../../redux/actions/genresActions'
@@ -23,6 +23,7 @@ function FilterByGenre() {
             <form onChange={handleFilter}>
                 <label>Filtrado por género:</label>
                 <select>
+                    <option value='-1'>Ninguno</option>
                 {   genres.length > 1 ?  genres.map(genre => (
                         <option key={genre.id} value={genre.id}>{genre.name}</option>
                     )) : 'cargando'
