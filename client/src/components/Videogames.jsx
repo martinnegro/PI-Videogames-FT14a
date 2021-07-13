@@ -18,7 +18,7 @@ const Videogames = function() {
 
     useEffect(() => {
         const aux = [];
-        vgamesStore.forEach(vg => { if (vg.check) aux.push(vg)});
+        vgamesStore.forEach(vg => { if (vg.checkGenre && vg.checkWord ) aux.push(vg)});
         setVgames(aux);
     },[vgamesStore])
 
