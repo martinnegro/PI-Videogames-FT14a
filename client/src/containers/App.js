@@ -13,7 +13,8 @@ import PostVideogame from '../components/PostVideogame';
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getVideogames())
+    dispatch(getVideogames());
+    
   },[])
 
 

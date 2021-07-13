@@ -1,5 +1,7 @@
 import { 
     GET_VIDEOGAMES,
+    SET_CHECKED_VGS,
+    SET_SELECTED_VGS,
     ORDER_ALPH,
     ORDER_BY_RATING,
     FILTER_BY_GENRE,
@@ -12,7 +14,6 @@ export const DECREMENT = 'DECREMENT';
 
 
 const initialState = {
-    videogamesCache: [],
     videogames: []
 }
 
@@ -20,11 +21,12 @@ export default function videogamesReducer(state = initialState, { type, payload}
     let aux;
     switch (type) {
         case GET_VIDEOGAMES: 
-            if (state.videogames.length === 0) state.videogames = payload;
+            payload.forEach(vg => vg.check = true);
             return {
-                ...state,
-                videogamesCache: payload
+                videogames: payload
+                
             };
+        
         case ORDER_ALPH: 
             aux = state.videogames.slice();
             if (payload === INCREMENT) aux.sort((a, b) => a.name > b.name ? 1 : -1);
@@ -42,21 +44,22 @@ export default function videogamesReducer(state = initialState, { type, payload}
                 videogames: aux
             }
         case FILTER_BY_GENRE:
-            if (payload === '-1') aux = state.videogamesCache;
-            else aux = state.videogamesCache.filter(vg => vg.genres.some(g => g.id === parseInt(payload)));
+            aux = state.videogames.slice()
+            if (payload === '-1') aux.forEach(vg => vg.check = true);
+            else aux.forEach(vg => vg.genres.some(g => g.id == payload) ? vg.check = true : vg.check = false);
             return {
                 ...state,
                 videogames: aux 
             }
-        case FILTER_BY_ORIGIN:
-            return state;
+        // case FILTER_BY_ORIGIN:
+        //     return state;
         case FILTER_BY_WORD:
-            
-            if (payload.length === 0) aux = state.videogamesCache
-            else {aux = state.videogamesCache.filter(vg => vg.name.includes(payload));console.log('entró')}
+            aux = state.videogames.slice()
+            if (payload.length === 0) aux.forEach(vg => vg.check = true)
+            else aux.forEach(vg => vg.name.toLowerCase().includes(payload.toLowerCase()) ? vg.check = true : vg.check = false )
             return {
                 ...state,
-                videogame: aux
+                videogames: aux
             }
 
         default: 

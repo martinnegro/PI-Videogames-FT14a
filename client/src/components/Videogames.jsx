@@ -12,9 +12,16 @@ import { getVideogames } from '../redux/actions/videogamesActions';
 const Videogames = function() {
     // Trae los juegos del redux
     
-    const vgames = useSelector((state) => state.videogamesReducer.videogames);
+    const vgamesStore = useSelector((state) => state.videogamesReducer.videogames);
     const dispatch = useDispatch();
-    
+    const [ vgames, setVgames] = useState()
+
+    useEffect(() => {
+        const aux = [];
+        vgamesStore.forEach(vg => { if (vg.check) aux.push(vg)});
+        setVgames(aux);
+    },[vgamesStore])
+
     // Controla la paginación 
     const [ pagination, setPagination ] = useState({
         paginatedGames: [],
@@ -25,11 +32,18 @@ const Videogames = function() {
     const indexOfLast  = (pagination.elementsPerPage * pagination.currentPage);
     const indexOfFirst = (indexOfLast - pagination.elementsPerPage);
     useEffect(() => {
-        setPagination({
-            ...pagination,
-            paginatedGames: vgames.slice(indexOfFirst, indexOfLast),
-            lastPage: Math.ceil(vgames.length / pagination.elementsPerPage)
-        })
+        if (vgames){
+            let currentPage = pagination.currentPage;
+            let newLast = Math.ceil(vgames.length / pagination.elementsPerPage);
+            if (newLast === 0 ) newLast = 1;
+            if (currentPage > newLast) currentPage = newLast;
+            setPagination({
+                ...pagination,
+                paginatedGames: vgames.slice(indexOfFirst, indexOfLast),
+                lastPage: newLast,
+                currentPage
+            })
+        }
     },[indexOfFirst, indexOfLast, vgames]);
 
 
@@ -46,7 +60,7 @@ const Videogames = function() {
         let currentPage = pagination.currentPage;
         let newLast = Math.ceil(vgames.length / elementsPerPage);
         if (e.target.value !== undefined){
-            if (pagination.currentPage > newLast ) currentPage = newLast;
+            if (currentPage > newLast ) currentPage = newLast;
             setPagination({
                 ...pagination,
                 elementsPerPage,
@@ -66,10 +80,9 @@ const Videogames = function() {
             <FiltersAndOrder/>
             
             <div className={style.vgsContainer}>
-                {pagination.paginatedGames.map(vg => 
-                    (<VideogameCard key={vg.id} vg={vg}/>)
-                )}
+                {pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>))}
             </div>
+            
         </div>
     )
 }

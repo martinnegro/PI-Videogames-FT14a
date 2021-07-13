@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const GET_VIDEOGAMES   = 'GET_VIDEOGAMES';  // Para traer los videojuegos de la base de datos.
+export const GET_VIDEOGAMES   = 'GET_VIDEOGAMES';
 export const ORDER_ALPH       = 'ORDER_ALPH';      
 export const ORDER_BY_RATING  = 'ORDER_BY_RATING'; 
 export const FILTER_BY_GENRE  = 'FILTER_BY_GENRE';
