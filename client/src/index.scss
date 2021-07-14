@@ -9,6 +9,19 @@ body {
   margin: 0;
   padding: 0;
 
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    transform: scale(1.05);
+    transition: 0.5s ease;
+  }
+  a:visited {
+    color: #ABABAB
+  }
+  a:active {
+    transform: scale(0.95);
+  }
   /* background-image: url('./imgs/1035104560.jpg');
   background-size: 200px; */
 }

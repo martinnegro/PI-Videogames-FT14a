@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const GET_VIDEOGAMES   = 'GET_VIDEOGAMES';
+export const SEARCH_API       = 'SEARCH_API';
 export const ORDER_ALPH       = 'ORDER_ALPH';      
 export const ORDER_BY_RATING  = 'ORDER_BY_RATING'; 
 export const FILTER_BY_GENRE  = 'FILTER_BY_GENRE';
@@ -14,6 +15,17 @@ export function getVideogames() {
                         type: GET_VIDEOGAMES,
                         payload: response.data
                     }))
+    }
+}
+
+export function searchApi(payload) {
+    console.log(payload)
+    return async function (dispatch) {
+        return await axios.get(`http://localhost:3001/videogames?name=${payload}`)
+        .then(response => dispatch({
+            type: SEARCH_API,
+            payload: response.data
+        }))
     }
 }
 

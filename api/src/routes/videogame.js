@@ -37,6 +37,7 @@ router.get('/:id', async (req, res, next) => {
             axios.get(`${API_URL_ID}${vg.idRawg}?key=${API_KEY}`)
                 .then( async (response) => {
                     vg.description = response.data.description;
+                    vg.imgUrlSec = response.data.background_image_additional
                     await vg.save();
                     res.json(vg);
                 }).catch(err => next(err))

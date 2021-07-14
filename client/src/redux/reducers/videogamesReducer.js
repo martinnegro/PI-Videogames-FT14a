@@ -1,7 +1,6 @@
 import { 
     GET_VIDEOGAMES,
-    SET_CHECKED_VGS,
-    SET_SELECTED_VGS,
+    SEARCH_API,
     ORDER_ALPH,
     ORDER_BY_RATING,
     FILTER_BY_GENRE,
@@ -25,6 +24,14 @@ export default function videogamesReducer(state = initialState, { type, payload}
                     vg.checkGenre = true;
                     vg.checkWord  = true;
                 });
+            return {
+                videogames: payload
+            };
+        case SEARCH_API:
+            payload.forEach(vg => {
+                vg.checkGenre = true;
+                vg.checkWord  = true;
+            });
             return {
                 videogames: payload
             };

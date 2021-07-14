@@ -7,8 +7,11 @@ function NavBar() {
 
     return (
         <div className={style.container}>
-            <span>Henry - Videogames</span>
-            <Link to='/'><span>Home</span></Link>
+            <div className={style.links}> 
+                <Link to='/'><div className={style.title}>Henry - Videogames</div></Link>
+                <Link to='/videogames'><div>Ver Juegos</div></Link>
+                <Link to='/postvideogame'><div>Agregar Juego</div></Link>
+            </div>
             <SearchBar/>
         </div>
     )

@@ -39,7 +39,7 @@
 
 .App {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-flow: wrap;
+  justify-content: center;
    
 }

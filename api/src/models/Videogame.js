@@ -28,6 +28,9 @@ module.exports = (sequelize) => {
     },
     imgUrl: {
       type: DataTypes.STRING
+    },
+    imgUrlSec: {
+      type: DataTypes.STRING
     }
   });
 };

@@ -43,7 +43,8 @@ function dbLoad( Videogame, Genre, Platform ) {
                 description: '',
                 released: result[j].released,
                 rating: result[j].rating,
-                imgUrl: result[j].background_image
+                imgUrl: result[j].background_image,
+                imgUrlSec: ''
               })
               const platformsIds = result[j].platforms.map( p => p.platform.id);
               const genresIds    = result[j].genres.map( p => p.id);
