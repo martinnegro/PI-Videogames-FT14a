@@ -41,5 +41,27 @@
   display: flex;
   flex-flow: wrap;
   justify-content: center;
+
+  
+
+  a {
+    text-decoration: white;
+  }
+  a:hover {
+    transform: scale(1.05);
+    transition: 0.2s ease;
+  }
+  a:focus{
+    color: inherit;
+  }
+  a:visited {
+    color: inherit;
+  }
+  a:active {
+    text-decoration: none;
+    transform: scale(0.95);
+    transition: 0.1s ease;
+    color: inherit;
+  }
    
 }

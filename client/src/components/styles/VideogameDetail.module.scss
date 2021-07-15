@@ -7,10 +7,19 @@
     
     .data {
         display: flex;
-        .description{
-            max-width: 800px
+        .specificOne{
+            .description{
+                max-width: 800px
+            }
+            .imgContainer{
+                display: flex;
+                justify-content: space-around;
+                img {
+                    width: 300px
+                }
+            }
         }
-        .specific {
+        .specificTwo {
             p {
                 margin: 0;
                 text-align: end;

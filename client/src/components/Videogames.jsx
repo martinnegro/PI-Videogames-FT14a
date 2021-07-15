@@ -77,12 +77,12 @@ const Videogames = function() {
                 setElementPerPage={setElementPerPage}
                 pagination={pagination}
             />
-            <FiltersAndOrder/>
-            
-            <div className={style.vgsContainer}>
-                {pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>))}
+            <div className={style.filtersAndGames}>
+                <FiltersAndOrder className={style.filters}/>
+                <div className={style.vgsContainer}>
+                    { pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
+                </div>
             </div>
-            
         </div>
     )
 }

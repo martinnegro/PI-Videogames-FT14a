@@ -37,9 +37,16 @@ function VideogameDetail({idDb}) {
                             {videogame.name}            
                         </h1>
                     <div className={style.data}>
-                        <div className={style.description} dangerouslySetInnerHTML={{ __html: videogame.description }}>
+                        <div className={style.specificOne}>
+                            <div className={style.description} 
+                                dangerouslySetInnerHTML={{ __html: videogame.description }}>
+                            </div>
+                            <div className={style.imgContainer}>
+                                <img src={videogame.imgUrl}/>
+                                <img src={videogame.imgUrlSec}/>
+                            </div>
                         </div>
-                        <div className={style.specific}>
+                        <div className={style.specificTwo}>
                             <div>
                                 <h5>Lanzamiento:</h5>
                                 <p>{videogame.released}</p>

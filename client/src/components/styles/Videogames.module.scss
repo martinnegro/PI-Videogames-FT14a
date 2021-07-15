@@ -1,11 +1,33 @@
+@import '../../variables';
+
 .container{
+    width: 85%;
+    
+    margin-top: 20px;
+    padding: 20px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    .vgsContainer {
-        width: 100%;
+
+    background-color: $main-background-color;
+
+    border-radius: 16px;
+
+   
+    .filtersAndGames {
         display: flex;
-        flex-flow: wrap;
-        justify-content: space-evenly;
+        background-color: $main-grey;
+        border-radius: 10px;
+
+        padding: 10px;
+        padding-right: 0;
+        
+        .vgsContainer {
+            display: flex;
+            flex-flow:wrap;
+            justify-content: space-evenly;
+            
+        }
     }
 }
