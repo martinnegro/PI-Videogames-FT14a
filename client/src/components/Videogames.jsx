@@ -71,7 +71,9 @@ const Videogames = function() {
     
     return (
         <div className={style.container}>
-            <input type='button' value='Cargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
+            <div className={style.hoverBorder}>
+            <input className={style.reloadButton} type='button' value='Recargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
+            </div>
             <Pagination 
                 setCurrentPage={setCurrentPage} 
                 setElementPerPage={setElementPerPage}
@@ -80,7 +82,7 @@ const Videogames = function() {
             <div className={style.filtersAndGames}>
                 <FiltersAndOrder className={style.filters}/>
                 <div className={style.vgsContainer}>
-                    { pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
+                    { pagination.paginatedGames.map(vg => (<div><VideogameCard key={vg.id} vg={vg}/></div>)) }
                 </div>
             </div>
         </div>

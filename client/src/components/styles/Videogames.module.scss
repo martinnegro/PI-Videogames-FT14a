@@ -14,7 +14,75 @@
 
     border-radius: 16px;
 
-   
+    // https://www.youtube.com/watch?v=p8vsMvmUDoY
+    .hoverBorder {
+        flex-basis: 28%;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        width: 215px;
+        z-index: 2;
+
+        &::before, &::after {
+            content: '';
+            height: 0;
+            width: 0;
+            border-radius: 5px;
+            background: linear-gradient(140deg, $marker-red, $marker-blue);
+            box-shadow: 0 0 10px linear-gradient(135deg, $marker-red, $marker-blue);
+            position: absolute;
+            z-index: -1;
+            animation: none
+        }
+        &::before {
+            left: 0;
+            top: -1px;
+        }
+        
+        &::after{
+            right: 0;
+            bottom: -2px;
+        }
+        @keyframes stroke {
+            0%{
+                height: 1px;
+                width: 0;
+            }
+            50%{
+                height: 1px;
+                width: calc(100%+1px);
+            }
+            100%{
+                height: calc(100% + 3px);
+                width: calc(100% + 1px);
+            }
+        }
+        
+        &:hover::after, &:hover::before {
+            animation: stroke 0.2s linear;
+            animation-fill-mode: forwards;
+        }
+
+        .reloadButton {
+            width: 100%;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+
+            border-radius: 5px;
+            @include bg-border-color-marker($main-grey);
+
+            transition: 0.3s ease;
+            &:hover {
+               //transform: scale(1.05);
+            }
+        }
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
     .filtersAndGames {
         display: flex;
         background-color: $main-grey;

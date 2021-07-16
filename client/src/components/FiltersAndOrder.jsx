@@ -8,11 +8,13 @@ import style from './styles/FiltersAndOrder.module.scss'
 
 function FiltersAndOrder() {
     return (
-        <div className={style.container}>
-        <FilterByWord/>
-        <OrderByAlph/>
-        <OrderByRating/>
-        <FilterByGenre/>
+        <div>
+            <div className={style.container}>
+                <FilterByWord/>
+                <OrderByAlph/>
+                <OrderByRating/>
+                <FilterByGenre/>
+            </div>
         </div>
     )
 }

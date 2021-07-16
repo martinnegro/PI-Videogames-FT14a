@@ -1,39 +1,67 @@
+@import '../../variables';
+
+
+
 .container {
-    width: 288px;
+    // width: 288px;
     height: 150px;
 
-    margin: 0;
+    margin-bottom: 5px;
+    border-radius: 5px;
 
-    background-size: 300px;
+    background-size: cover;
+    background-position: top;
     background-repeat: no-repeat;
+    
+    flex-grow: 1;
+    flex-basis: 0;
 
     display: flex;
-    flex-direction: column-reverse;
+    align-items: end;    
+    transition: all 0.5s ease;
 
-    .genresContainer {
-        margin: 5px;
-        display: flex;
-        justify-content: start;
-
-        color: white;
-        background-color: #808080cc;
+    
+    .textContainer {        
+        // width: 288px;
         
+        background: rgb(128,128,128);
+        background: linear-gradient( rgba(128,128,128,0) 0%, rgba(128,128,128,1) 64%);
+        background-position: 0 50%;
 
-        .genres {
-            margin: 3px;
-            padding: 0;
+        border-radius: 0 0 5px 5px;
+        
+        .genresContainer {
+            margin: 0 0 0 5px;
+            color: white;
+            padding: 3px 0 0 0;            
+            .genres {
+                margin: 0 2px 0 2px;    
+            }
+        }
+        .title {
+            padding: 0 0 0 5px;
+            
+            color: white;
+            font-size: 1.4rem;
+            font-weight: bold;
+            
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            
         }
     }
-    .title {
-        margin: 5px;
-        padding: 3px;
-
-        color: white;
-        background-color: #808080cc;
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px hsl(0, 100%, 25%);
         
-
-        font-size: larger;
     }
 
+    &:hover > .textContainer {  
+        background-position: 100% 0;
+        background: hsl(0, 100%, 25%);
+        background: linear-gradient(180deg, rgba(128,128,128,0) 0%, hsl(0, 100%, 25%) 64%);
 
+    }
 }
+

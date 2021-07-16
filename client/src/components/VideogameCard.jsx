@@ -11,9 +11,11 @@ function VideogameCard({vg}) {
     return (
         <Link to={`/videogame/${vg.id}`}>
         <div className={style.container} style={imgBack}>
-            <div className={style.title}>{vg.name}</div>
-            <div className={style.genresContainer}>
-                {vg.genres.map(genre => <div key={genre.id} className={style.genres}>{genre.name}</div>)}
+            <div className={style.textContainer}>
+                <div className={style.genresContainer}>
+                    {vg.genres.map(genre => <span key={genre.id} className={style.genres}>{genre.name}</span>)}
+                </div>
+                <div className={style.title}>{vg.name}</div>
             </div>
         </div>
         </Link>

@@ -20,22 +20,22 @@ body {
     text-decoration: white;
     transition: 0.2s ease;
   }
-  a:hover {
-    transform: scale(1.05);
-  }
-  a:focus{
-    color:inherit;
-  }
-  a:visited {
-    text-decoration: none;
-    color: inherit;
-  }
-  a:active {
-    text-decoration: none;
-    transform: scale(0.95);
-    transition: 0.1s ease;
-    color:inherit
-  }
+  // a:hover {
+  //   transform: scale(1.05);
+  // }
+  // a:focus{
+  //   color:inherit;
+  // }
+  // a:visited {
+  //   text-decoration: none;
+  //   color: inherit;
+  // }
+  // a:active {
+  //   text-decoration: none;
+  //   transform: scale(0.95);
+  //   transition: 0.1s ease;
+  //   color:inherit
+  // }
   background-image: url('./imgs/depositphotos_393833554-stock-photo-video-game-controller-gamepad-background.jpg');
   background-size: 400px; 
 }

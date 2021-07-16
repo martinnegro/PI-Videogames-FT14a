@@ -8,3 +8,8 @@ $marker-red: #B02A2A;
 $marker-blue: #2F46BA;
 
 $main-font-size: 16px;
+
+@mixin bg-border-color-marker ($color) {
+    border: solid 1px $color + 25;
+    background-color: $color;
+}
