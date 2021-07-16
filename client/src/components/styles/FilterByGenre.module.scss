@@ -1,0 +1,32 @@
+@import '../../variables';
+
+.container {
+    margin: 10px 0 0 0;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        
+        label {
+            @include bg-border-color-marker($third-grey);
+            color: $main-background-color + 25;
+            padding: 5px 0 0 5px;
+            border-radius: 5px 5px 0 0;
+            border-bottom: none
+        }
+
+        select {
+            height: 25px;
+            width: 100%;
+            @include bg-border-color-marker($marker-blue);
+            color: white;
+
+            align-self: center;
+            box-sizing: border-box;
+
+            &:hover {
+                background: $marker-blue + 25;
+            }
+        }
+    }
+}

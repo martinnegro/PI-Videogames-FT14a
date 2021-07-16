@@ -1,8 +1,11 @@
 @import '../../variables';
 .container {
+    width: 225px;
     height: auto;
-    padding: 5px;
+    
+    margin: 0 5px 0 0;
+    padding: 10px;
 
-
+    border-radius: 5px;
     background-color: $sec-grey;
 }

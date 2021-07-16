@@ -1,6 +1,5 @@
 import React from 'react'
-import OrderByAlph from './FiltersAndOrder/OrderByAlph';
-import OrderByRating from './FiltersAndOrder/OrderByRating';
+import OrderByAlph from './FiltersAndOrder/Ordering';
 import FilterByGenre from './FiltersAndOrder/FilterByGenre';
 import FilterByWord from './FiltersAndOrder/FilterByWord';
 
@@ -12,7 +11,6 @@ function FiltersAndOrder() {
             <div className={style.container}>
                 <FilterByWord/>
                 <OrderByAlph/>
-                <OrderByRating/>
                 <FilterByGenre/>
             </div>
         </div>

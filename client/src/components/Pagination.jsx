@@ -22,20 +22,20 @@ function Pagination({setCurrentPage, setElementPerPage, pagination}) {
             <form className={style.pagination} onClick={setCurrentPage}>
                 <input type='button' value={`1`} />
                 {
-                    currentPage < 4 ? <input type='button' disabled='true' value='..'/> :
+                    currentPage < 4 ? <input type='button' disabled={true} value='..'/> :
                     <input type='button' value={currentPage - 2}/>
                 }
                 {
-                    currentPage < 3 ? <input type='button' disabled='true' value='..'/> :
+                    currentPage < 3 ? <input type='button' disabled={true} value='..'/> :
                     <input type='button' value={currentPage - 1}/>
                 }
                 <input type='button' value={currentPage} className={style.current}/>
                 {   
-                    (lastPage - currentPage) < 2 ? <input type='button' disabled='true' value='..'/> :
+                    (lastPage - currentPage) < 2 ? <input type='button' disabled={true} value='..'/> :
                     <input type='button' value={1 + currentPage}/>
                 }
                 {
-                    (lastPage - currentPage) < 3 ? <input type='button' disabled='true' value='..'/> :
+                    (lastPage - currentPage) < 3 ? <input type='button' disabled={true} value='..'/> :
                     <input type='button' value={2 + currentPage}/>
                 }
                 <input type='button' value={pagination.lastPage || 1}/>

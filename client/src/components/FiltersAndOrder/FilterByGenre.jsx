@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterByGenre } from '../../redux/actions/videogamesActions'
 import { getGenres } from '../../redux/actions/genresActions'
 
+import style from '../styles/FilterByGenre.module.scss'
+
 
 function FilterByGenre() {
     const genres = useSelector(state => state.genresReducer.genres);
@@ -19,7 +21,7 @@ function FilterByGenre() {
         }
 
     return (
-        <div>
+        <div className={style.container}>
             <form onChange={handleFilter}>
                 <label>Filtrado por género:</label>
                 <select>
