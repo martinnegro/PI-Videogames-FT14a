@@ -13,3 +13,29 @@ $main-font-size: 16px;
     border: solid 1px $color + 25;
     background-color: $color;
 }
+
+@mixin label-input {
+    @include bg-border-color-marker($third-grey);
+        
+        color: $main-background-color + 25;
+        padding: 5px 0 0 5px;
+        border-radius: 5px 5px 0 0;
+        border-bottom: none
+}
+
+@mixin input-text () {
+    @include bg-border-color-marker($marker-blue + 50);
+        
+    box-sizing: border-box;
+    color: white;
+    font-family: inherit;
+    
+    transition: all 0.1s ease;
+    &:hover {
+        background-color: hsl(230, 74%, 69%) + 25;
+    }
+    &:focus {
+        outline: none;
+        transform: scale(1.1);
+    }
+}

@@ -1,15 +1,194 @@
+@import '../../variables';
+
 .container {
+    background-color: $sec-grey;
+    width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
+    border-radius: 16px;
+
+    padding: 5px;
+    
+    .inputs {
+        width: 300px;
+        div {
+            margin: 10px 0 10px 0;
+            display: flex;
+            flex-direction: column;
+            div {
+                margin: 0;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+                
+                @include label-input;
+
+                span {
+                    margin: 0 2px 0 0;
+                    font-size: 0.7rem;
+                    color: white;
+                    @include bg-border-color-marker($marker-red + 25);
+                    border: none;
+                    border-radius: 2px;
+                }
+            }
+            input {
+                @include input-text;
+            }
+        }
+    }
+
     .genresContainer {
         display: flex;
         flex-direction: column;
-        
-        border:2px solid #ccc; 
+        border:2px solid #ccc;
+        border-radius: 5px;
         width:130px; height: 150px; 
         overflow-y: scroll;
-        font-size: small; 
+        font-family: inherit;
+        font-size: small;
+        color: $main-background-color;
+    
+        background-color: $third-grey;
+        
+        .optionContainer {
+            display: flex;
+            position: relative;
+            margin-bottom: 12px;
+            padding-left: 1.5rem;
+            margin: 1px 0 2px 2px;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;            
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+            .checkmark {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 1rem;
+                width: 1rem;
+                background-color: #eee;
+                border-radius: 2px;
+                transition: all 200ms ease;
+            }
+            &:hover input ~ .checkmark {
+                background-color: $marker-blue + 50;
+                box-shadow: 0 0 3px $marker-blue;
+            }
+            /* When the checkbox is checked, add a blue background */
+            & input:checked ~ .checkmark {
+              background-color: $marker-red + 25;
+              box-shadow: 0 0 3px $marker-red;
+            }
+
+            /* Style the checkmark/indicator */
+            & .checkmark:after {
+              left: 9px;
+              top: 5px;
+              width: 5px;
+              height: 10px;
+              border: solid white;
+              border-width: 0 3px 3px 0;
+              -webkit-transform: rotate(45deg);
+              -ms-transform: rotate(45deg);
+              transform: rotate(45deg);
+            }
+            
+        }
+        
+    }
+    
+    .hoverBorder {
+        // flex-basis: 28%;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        width: 300px;
+        z-index: 2;
+
+        transition: all 0.5s ease;
+
+        &::before, &::after {
+            content: '';
+            height: 0;
+            width: 0;
+            border-radius: 5px;
+            background: linear-gradient(140deg, $marker-red, $marker-blue);
+            box-shadow: 0 0 10px linear-gradient(135deg, $marker-red, $marker-blue);
+            position: absolute;
+            z-index: -1;
+            animation: none
+        }
+        &::before {
+            left: 0;
+            top: -1px;
+        }
+        
+        &::after{
+            right: 0;
+            bottom: -2px;
+        }
+        @keyframes stroke {
+            0%{
+                height: 1px;
+                width: 0;
+            }
+            50%{
+                height: 1px;
+                width: calc(100%+1px);
+            }
+            100%{
+                height: calc(100% + 3px);
+                width: calc(100% + 1px);
+            }
+        }
+        
+        &:hover::after, &:hover::before {
+            animation: stroke 0.2s linear;
+            animation-fill-mode: forwards;
+        }
+
+        .submit {
+            width: 100%;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+
+            border-radius: 5px;
+            @include bg-border-color-marker($main-grey);
+
+            
+        }
+
+        &:hover {
+           transform: scale(1.05);
+        }
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+
+    .inputDisabled {
+        width: 300px;
+        .submit {
+            width: 100%;
+            color:$sec-grey;
+            font-family: inherit;
+            font-size: 1rem;
+            border-radius: 5px;
+            @include bg-border-color-marker($main-grey);
+        }
     }
 }

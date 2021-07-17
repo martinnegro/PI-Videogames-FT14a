@@ -14,6 +14,31 @@ const initialState = {
     genres: []
 }
 
+function validate(input) {
+    let errors = {};
+    const { name, description, imgUrl } = input
+    if(!name) errors.name = 'El nombre es obligatorio';
+    if(!description) errors.description = 'La descripción es obligatoria';
+    const pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    if (!imgUrl) errors.imgUrl = 'La url de la imagen es obligatoria';
+    else if (!pattern.test(imgUrl)) errors.imgUrl = 'No es una url válida';
+
+    return errors;
+}
+
+
+
+// A validation function to check if the input is a url
+const validateUrl = (url) => {
+    const pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    return pattern.test(url);
+}
+
+// A validation function to check it the input is not empty
+const validateInput = (input) => {
+    return input.length > 0;
+}
+
 function PostVideogame() {
     // Trae los géneros del redux y los setea si está vacío
     const dispatch = useDispatch();
@@ -27,10 +52,15 @@ function PostVideogame() {
         dispatch(setCheckedGenres())
     },[genres])
 
-    // Un estado para los input que se enviarán
     const [ input, setInput ] = useState(initialState);
+    const [ errors, setErrors ] = useState([{}]);
+    const [ submit, setSubmit ] = useState(true);
     
     function handleInputChange(e) {
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -45,9 +75,15 @@ function PostVideogame() {
             genres: selectedGenres
         })
     },[selectedGenres])
+
+    useEffect(()=>{
+        if(Object.keys(errors).length < 1) setSubmit(false);
+        else setSubmit(true)
+    },[errors])
     
     // POST /videogame
     async function handleSubmit(e) {
+        
         axios.post('http://localhost:3001/videogame',input)
             .then(response => console.log(response))
         setInput(initialState);    
@@ -56,21 +92,31 @@ function PostVideogame() {
 
     return (
         <div className={style.container}>
-            <form onChange={handleInputChange}>
+            <form onChange={handleInputChange} className={style.inputs}>
                 <div>
+                    <div>
                     <label>Nombre:</label>
+                    <span>{errors.name}</span>
+                    </div>
                     <input type='text' name='name' value={input.name}/>
                 </div>
                 <div>
+                    <div>
                     <label>Descripción:</label>
+                    <span>{errors.description}</span>
+                    </div>
                     <input type='text' name='description' value={input.description}/>
                 </div>
                 <div>
-                    <label>Lanzaminto:</label>
+                    <div>
+                    <label>Lanzamiento:</label>
+                    </div>
                     <input type='text' name='released' value={input.released}/>
                 </div>
                 <div>
+                    <div>
                     <label>Rating:</label>
+                    </div>
                     <input 
                         type='number' 
                         name='rating'
@@ -80,26 +126,36 @@ function PostVideogame() {
                         value={input.rating}/>
                 </div>
                 <div>
-                    <label>Imágen:</label>
+                    <div>
+                        <label>Imagen:</label>
+                        <span>{errors.imgUrl}</span>
+                    </div>
                     <input type='text' name='imgUrl' value={input.imgUrl}/>
                 </div>
             </form>
             <form className={style.genresContainer} >
                 {
                     genres.map((genre, index) => (
-                        <div key={genre.id}>
+                        
+                        <label key={genre.id} className={style.optionContainer}>
+                            {genre.name}
                         <input 
                             type='checkbox'
                             value={genre.id}
                             name={input.genres}
                             checked={checkedGenres[index]}
                             onChange={() => handleCheckbox(index)}
-                        /><label>{genre.name}</label>
-                        </div>
+                        /><span className={style.checkmark}></span>
+                        
+                        </label>
                     ))
                 }
             </form>
-            <input type='submit' value='Subir Juego' onClick={handleSubmit}/>
+            <div className={ !submit ? style.hoverBorder : style.inputDisabled }>
+                <input type='submit' value='Subir Juego' 
+                    disabled={submit} className={style.submit}
+                    onClick={handleSubmit}/>
+            </div>
         </div>
     )
 }

@@ -1,22 +1,12 @@
 @import '../../variables';
 
 .container{
-    width: 85%;
-    
-    margin-top: 20px;
-    padding: 20px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    background-color: $main-background-color;
-
-    border-radius: 16px;
-
     // https://www.youtube.com/watch?v=p8vsMvmUDoY
     .hoverBorder {
-        flex-basis: 28%;
+        flex-basis: 0;
         box-sizing: border-box;
         text-align: center;
         position: relative;
@@ -56,7 +46,7 @@
                 width: calc(100%+1px);
             }
             100%{
-                height: calc(100% + 3px);
+                height: calc(100% + 2px);
                 width: calc(100% + 1px);
             }
         }
