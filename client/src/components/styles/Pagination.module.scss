@@ -68,9 +68,12 @@
             @include bg-border-color-marker($sec-grey);
             
             font-family: inherit;
-            
+                        
             &:hover {
                 transform: scale(1.05);
+                &:disabled {
+                    transform: scale(1);
+                }
             }
 
             &:active {
@@ -90,11 +93,11 @@
                 @include bg-border-color-marker($marker-blue);
                 box-shadow: 0 0 5px $marker-blue;
             }
-
         }
         .current {
             @include bg-border-color-marker($marker-red);
             box-shadow: 0 0 5px $marker-red;
+            transform: scale(1.05);
         }
     }
 }

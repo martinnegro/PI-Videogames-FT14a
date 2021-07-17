@@ -8,20 +8,28 @@ function VideogameDetail({idDb}) {
     const [ error, setError ] = useState();
     useEffect(() => {   
         axios.get(`http://localhost:3001/videogame/${idDb}`)
-        .then(res => setVideogame(res.data))
+        .then(res => {
+            setVideogame(res.data);
+            
+        })
         .catch((err) => {
             setError(err)
             setVideogame('Hubo un problema en el servidor o no se encontró el videojuego.')
         })
     },[])
     console.log(videogame)
-    // Ruta de detalle de videojuego: debe contener
-    // 
-    // Los campos mostrados en la ruta principal para cada videojuegos (imagen, nombre, y géneros)
-    // Descripción
-    // Fecha de lanzamiento
-    // Rating
-    // Plataformas
+ 
+    function textRating({ rating }) {
+        const ratingColor = {}
+        rating = parseFloat(rating)
+        if ( rating === 5 ) ratingColor.color = '#356B8C';
+        else if ( rating > 4.5 ) ratingColor.color = '#3E5902';
+        else if ( rating >   4 ) ratingColor.color = '#93A603';
+        else if ( rating >   3 ) ratingColor.color = '#BF9180';
+        else                ratingColor.color = '#A61B0F';
+        return ratingColor;
+    }
+    
     return (
         <>
             { 
@@ -50,6 +58,10 @@ function VideogameDetail({idDb}) {
                             <div>
                                 <h5>Lanzamiento:</h5>
                                 <p>{videogame.released}</p>
+                            </div>
+                            <div>
+                                <h5 >Rating:</h5>
+                                <p style={textRating(videogame)}>{videogame.rating}</p>
                             </div>
                             <div className={style.genres}>
                                 <h5>Géneros:</h5>

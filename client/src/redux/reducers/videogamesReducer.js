@@ -13,7 +13,8 @@ export const DECREMENT = 'DECREMENT';
 
 
 const initialState = {
-    videogames: []
+    videogames: [],
+    selectedVideogames: []
 }
 
 export default function videogamesReducer(state = initialState, { type, payload}) {
@@ -50,7 +51,8 @@ export default function videogamesReducer(state = initialState, { type, payload}
             if (payload === DECREMENT) aux.sort((a, b) => a.rating > b.rating ? -1 : 1);
             return {
                 ...state,
-                videogames: aux
+                videogames: aux,
+                
             }
         case FILTER_BY_GENRE:
             aux = state.videogames.slice()
@@ -58,7 +60,8 @@ export default function videogamesReducer(state = initialState, { type, payload}
             else aux.forEach(vg => vg.genres.some(g => g.id == payload) ? vg.checkGenre = true : vg.checkGenre = false);
             return {
                 ...state,
-                videogames: aux 
+                videogames: aux,
+                
             }
         case FILTER_BY_WORD:
             aux = state.videogames.slice()
@@ -66,7 +69,8 @@ export default function videogamesReducer(state = initialState, { type, payload}
             else aux.forEach(vg => vg.name.toLowerCase().includes(payload.toLowerCase()) ? vg.checkWord = true : vg.checkWord = false )
             return {
                 ...state,
-                videogames: aux
+                videogames: aux,
+                
             }    
         case FILTER_BY_ORIGIN:
             aux = state.videogames.slice()
@@ -75,9 +79,11 @@ export default function videogamesReducer(state = initialState, { type, payload}
             if (payload === 'USER') aux.forEach(vg => !vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
             return {
                 ...state,
-                videogames: aux 
+                videogames: aux,
+                
             }
         default: 
             return state;
     }
 }
+
