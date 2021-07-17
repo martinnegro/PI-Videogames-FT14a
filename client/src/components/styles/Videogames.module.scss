@@ -75,18 +75,22 @@
             transform: scale(0.9);
         }
     }
-    .filtersAndGames {
-        display: flex;
-        background-color: $main-grey;
+    .info {
         border-radius: 10px;
-
+        background-color: $main-grey;
         padding: 10px;
         padding-right: 0;
-        
-        .vgsContainer {
+        margin: 10px 0 0 0;
+        display: flex;
+        flex-direction: row;
+        .PaginationAndGames {
             display: flex;
-            flex-flow:wrap;
-            justify-content: space-evenly;
+            flex-direction: column;
+            .vgsContainer {
+                display: flex;
+                flex-flow:wrap;
+                justify-content: space-evenly;
+            }
         }
     }
 }

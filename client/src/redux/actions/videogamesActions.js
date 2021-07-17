@@ -56,3 +56,10 @@ export function filterByWord(payload) {
         payload
     }
 }
+
+export function filterByOrigin(payload) {
+    return {
+        type: FILTER_BY_ORIGIN,
+        payload
+    }
+}

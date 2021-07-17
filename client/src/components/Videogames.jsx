@@ -18,7 +18,7 @@ const Videogames = function() {
 
     useEffect(() => {
         const aux = [];
-        vgamesStore.forEach(vg => { if (vg.checkGenre && vg.checkWord ) aux.push(vg)});
+        vgamesStore.forEach(vg => { if (vg.checkGenre && vg.checkWord && vg.checkOrigin) aux.push(vg)});
         setVgames(aux);
     },[vgamesStore])
 
@@ -74,15 +74,17 @@ const Videogames = function() {
             <div className={style.hoverBorder}>
             <input className={style.reloadButton} type='button' value='Recargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
             </div>
-            <Pagination 
-                setCurrentPage={setCurrentPage} 
-                setElementPerPage={setElementPerPage}
-                pagination={pagination}
-            />
-            <div className={style.filtersAndGames}>
+            <div className={style.info}>
                 <FiltersAndOrder className={style.filters}/>
-                <div className={style.vgsContainer}>
-                    { pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
+                <div className={style.PaginationAndGames}>
+                    <Pagination 
+                        setCurrentPage={setCurrentPage} 
+                        setElementPerPage={setElementPerPage}
+                        pagination={pagination}
+                    />
+                        <div className={style.vgsContainer}>
+                            { pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
+                    </div>
                 </div>
             </div>
         </div>

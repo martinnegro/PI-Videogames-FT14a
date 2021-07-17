@@ -21,8 +21,9 @@ export default function videogamesReducer(state = initialState, { type, payload}
     switch (type) {
         case GET_VIDEOGAMES: 
             payload.forEach(vg => {
-                    vg.checkGenre = true;
-                    vg.checkWord  = true;
+                    vg.checkGenre  = true;
+                    vg.checkWord   = true;
+                    vg.checkOrigin = true;
                 });
             return {
                 videogames: payload
@@ -59,8 +60,6 @@ export default function videogamesReducer(state = initialState, { type, payload}
                 ...state,
                 videogames: aux 
             }
-        // case FILTER_BY_ORIGIN:
-        //     return state;
         case FILTER_BY_WORD:
             aux = state.videogames.slice()
             if (payload.length === 0) aux.forEach(vg => vg.checkWord = true)
@@ -68,8 +67,16 @@ export default function videogamesReducer(state = initialState, { type, payload}
             return {
                 ...state,
                 videogames: aux
+            }    
+        case FILTER_BY_ORIGIN:
+            aux = state.videogames.slice()
+            if (payload === '-1'  ) aux.forEach(vg => vg.checkOrigin = true);
+            if (payload === 'API' ) aux.forEach(vg =>  vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
+            if (payload === 'USER') aux.forEach(vg => !vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
+            return {
+                ...state,
+                videogames: aux 
             }
-
         default: 
             return state;
     }
