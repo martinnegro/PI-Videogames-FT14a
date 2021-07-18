@@ -20,13 +20,20 @@ function VideogameDetail({idDb}) {
     console.log(videogame)
  
     function textRating({ rating }) {
-        const ratingColor = {}
+        const ratingColor = {
+            fontWeight: 'bold',
+            borderRadius: '2px',
+            width: '35%',
+            marginLeft: 'auto',
+            
+            
+        }
         rating = parseFloat(rating)
-        if ( rating === 5 ) ratingColor.color = '#356B8C';
-        else if ( rating > 4.5 ) ratingColor.color = '#3E5902';
-        else if ( rating >   4 ) ratingColor.color = '#93A603';
-        else if ( rating >   3 ) ratingColor.color = '#BF9180';
-        else                ratingColor.color = '#A61B0F';
+        if ( rating === 5 ) ratingColor.backgroundColor = '#356B8C';
+        else if ( rating > 4.5 ) ratingColor.backgroundColor = '#3E5902';
+        else if ( rating >   4 ) ratingColor.backgroundColor = '#93A603';
+        else if ( rating >   3 ) ratingColor.backgroundColor = '#BF9180';
+        else                ratingColor.backgroundColor = '#A61B0F';
         return ratingColor;
     }
     
@@ -45,16 +52,8 @@ function VideogameDetail({idDb}) {
                             {videogame.name}            
                         </h1>
                     <div className={style.data}>
-                        <div className={style.specificOne}>
-                            <div className={style.description} 
-                                dangerouslySetInnerHTML={{ __html: videogame.description }}>
-                            </div>
-                            <div className={style.imgContainer}>
-                                <img src={videogame.imgUrl}/>
-                                <img src={videogame.imgUrlSec}/>
-                            </div>
-                        </div>
-                        <div className={style.specificTwo}>
+
+                    <div className={style.specificTwo}>
                             <div>
                                 <h5>Lanzamiento:</h5>
                                 <p>{videogame.released}</p>
@@ -72,6 +71,19 @@ function VideogameDetail({idDb}) {
                                 {videogame.platforms.map(g => (<p>{g.name}</p>))}
                             </div>
                         </div>
+                        
+                        <div className={style.specificOne}>
+                            <div className={style.description} 
+                                dangerouslySetInnerHTML={{ __html: videogame.description }}>
+                            </div>
+                            <div className={style.imgContainer}>
+                                <img src={videogame.imgUrl}/>
+                                <img src={videogame.imgUrlSec}/>
+                            </div>
+                        </div>
+                        
+                        
+
                     </div>
                 </div>
             }

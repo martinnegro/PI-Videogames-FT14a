@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { filterByWord } from '../../redux/actions/videogamesActions';
+import { setInputWordFilter } from '../../redux/actions/inputsActions'
 import style from '../styles/FilterByWord.module.scss';
 
 function FilterByWord() {
-    const [ input, setInput] = useState('');
+    const input = useSelector(state => state.inputsReducer.inputWordFilter);
     const dispatch = useDispatch();
     function handleInput(e) {
-        setInput(e.target.value)
+        dispatch(setInputWordFilter(e.target.value))
     }
     useEffect(() => {
         dispatch(filterByWord(input));

@@ -56,7 +56,7 @@ export default function videogamesReducer(state = initialState, { type, payload}
             }
         case FILTER_BY_GENRE:
             aux = state.videogames.slice()
-            if (payload === '-1') aux.forEach(vg => vg.checkGenre = true);
+            if (payload === -1) aux.forEach(vg => vg.checkGenre = true);
             else aux.forEach(vg => vg.genres.some(g => g.id == payload) ? vg.checkGenre = true : vg.checkGenre = false);
             return {
                 ...state,
@@ -74,7 +74,7 @@ export default function videogamesReducer(state = initialState, { type, payload}
             }    
         case FILTER_BY_ORIGIN:
             aux = state.videogames.slice()
-            if (payload === '-1'  ) aux.forEach(vg => vg.checkOrigin = true);
+            if (payload === -1  ) aux.forEach(vg => vg.checkOrigin = true);
             if (payload === 'API' ) aux.forEach(vg =>  vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
             if (payload === 'USER') aux.forEach(vg => !vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
             return {

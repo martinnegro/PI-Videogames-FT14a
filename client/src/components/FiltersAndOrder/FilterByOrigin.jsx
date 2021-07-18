@@ -1,25 +1,30 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 
-import { useDispatch } from 'react-redux';
-import { filterByOrigin } from '../../redux/actions/videogamesActions'
+import { useDispatch, useSelector } from 'react-redux';
+import { filterByOrigin } from '../../redux/actions/videogamesActions';
+import { setOriginFilter } from '../../redux/actions/inputsActions';
 
 
 import style from '../styles/FilterByGenre.module.scss'
 
 
 function FilterByOrigin() {
+    const input = useSelector(state => state.inputsReducer.originFilter)
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        dispatch(filterByOrigin(input))
+    },[input])
+
     function handleFilter(e) {
-            dispatch(filterByOrigin(e.target.value))
-            e.preventDefault()
-        }
+        dispatch(setOriginFilter(e.target.value))
+    }
 
     return (
         <div className={style.container}>
             <form onChange={handleFilter}>
                 <label>Filtrado por origen:</label>
-                <select>
+                <select value={input}>
                     <option value='-1'>Ninguno</option>
                     <option value='API'>API</option>
                     <option value='USER'>Usuario</option>

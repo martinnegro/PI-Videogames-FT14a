@@ -1,30 +1,37 @@
-import React, {  } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { orderAlph, orderByRating } from '../../redux/actions/videogamesActions';
+import { setSelectOrder } from '../../redux/actions/inputsActions';
 import { INCREMENT, DECREMENT } from '../../redux/reducers/videogamesReducer';
 import style from '../styles/Ordering.module.scss';
 
 
 function OrderByAlph() {
+    const input = useSelector(select => select.inputsReducer.selectOrder);
     const dispatch = useDispatch();
-    
+
     function handleOrder(e) {
-        const index = e.target.options.selectedIndex;
-        if ( index > 0 && index <= 2 ) dispatch(orderAlph(e.target.value));
-        if ( index >= 3 ) dispatch(orderByRating(e.target.value));
-        e.preventDefault()
+        dispatch(setSelectOrder(parseInt(e.target.value)))
     }
+    useEffect(() => {
+        console.log('ENTRÓ?');
+        const selected = parseInt(input);
+        if ( selected === 1 ) dispatch(orderAlph(INCREMENT));
+        if ( selected === 2 ) dispatch(orderAlph(DECREMENT));
+        if ( selected === 3 ) dispatch(orderByRating(INCREMENT));
+        if ( selected === 4 ) dispatch(orderByRating(DECREMENT));
+    },[input])
 
     return (
         <div className={style.container}>
-            <form onChange={handleOrder} className={style.form}>
+            <form onChange={handleOrder} className={style.form} >
                 <label>Ordenado Alfabético:</label>
-                <select name='alphabet' >
-                    <option defaultValue={undefined}></option>
-                    <option value={INCREMENT} id='alph'>A - Z</option>
-                    <option value={DECREMENT} id='alph'>Z - A</option>
-                    <option value={INCREMENT}>Menor a Mayor</option>
-                    <option value={DECREMENT}>Mayor a Menor</option>
+                <select name='alphabet' value={input}>
+                    <option value={0}></option>
+                    <option value={1}>A - Z</option>
+                    <option value={2}>Z - A</option>
+                    <option value={3}>Menor a Mayor</option>
+                    <option value={4}>Mayor a Menor</option>
                 </select>
             </form>
         </div>

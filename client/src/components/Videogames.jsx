@@ -7,6 +7,7 @@ import FiltersAndOrder from './FiltersAndOrder'
 import style from './styles/Videogames.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { getVideogames } from '../redux/actions/videogamesActions';
+import { restoreValues } from '../redux/actions/inputsActions';
 
 
 const Videogames = function() {
@@ -68,11 +69,16 @@ const Videogames = function() {
             })
         }
     }
+
+    function handleReload() {
+        dispatch(getVideogames());
+        dispatch(restoreValues());
+    }
     
     return (
         <div className={style.container}>
             <div className={style.hoverBorder}>
-            <input className={style.reloadButton} type='button' value='Recargar videojuegos' onClick={()=> dispatch(getVideogames())}/>
+            <input className={style.reloadButton} type='button' value='Recargar videojuegos' onClick={handleReload}/>
             </div>
             <div className={style.info}>
                 <FiltersAndOrder className={style.filters}/>
