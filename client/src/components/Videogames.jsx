@@ -18,8 +18,9 @@ const Videogames = function() {
     const [ vgames, setVgames] = useState()
 
     useEffect(() => {
-        const aux = [];
-        vgamesStore.forEach(vg => { if (vg.checkGenre && vg.checkWord && vg.checkOrigin) aux.push(vg)});
+        let aux = [];
+        if (typeof vgamesStore === 'string') aux = vgamesStore;
+        else vgamesStore.forEach(vg => { if (vg.checkGenre && vg.checkWord && vg.checkOrigin) aux.push(vg)});
         setVgames(aux);
     },[vgamesStore])
 
@@ -33,7 +34,7 @@ const Videogames = function() {
     const indexOfLast  = (pagination.elementsPerPage * pagination.currentPage);
     const indexOfFirst = (indexOfLast - pagination.elementsPerPage);
     useEffect(() => {
-        if (vgames){
+        if (vgames && typeof vgames !== 'string'){
             let currentPage = pagination.currentPage;
             let newLast = Math.ceil(vgames.length / pagination.elementsPerPage);
             if (newLast === 0 ) newLast = 1;
@@ -41,7 +42,7 @@ const Videogames = function() {
             setPagination({
                 ...pagination,
                 paginatedGames: vgames.slice(indexOfFirst, indexOfLast),
-                lastPage: newLast,
+                lastPage: newLast,  
                 currentPage
             })
         }
@@ -88,8 +89,8 @@ const Videogames = function() {
                         setElementPerPage={setElementPerPage}
                         pagination={pagination}
                     />
-                        <div className={style.vgsContainer}>
-                            { pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
+                    <div className={style.vgsContainer}>
+                        { typeof vgames ==='string' ? <div>{vgames}</div> : pagination.paginatedGames.map(vg => (<VideogameCard key={vg.id} vg={vg}/>)) }
                     </div>
                 </div>
             </div>

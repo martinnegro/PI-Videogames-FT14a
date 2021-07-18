@@ -1,15 +1,22 @@
 import axios from 'axios';
 
-export const GET_VIDEOGAMES   = 'GET_VIDEOGAMES';
-export const SEARCH_API       = 'SEARCH_API';
-export const ORDER_ALPH       = 'ORDER_ALPH';      
-export const ORDER_BY_RATING  = 'ORDER_BY_RATING'; 
-export const FILTER_BY_GENRE  = 'FILTER_BY_GENRE';
-export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN';
-export const FILTER_BY_WORD   = 'FILTER_BY_WORD';
+export const GET_VIDEOGAMES    = 'GET_VIDEOGAMES';
+export const SEARCH_API        = 'SEARCH_API';
+export const ORDER_ALPH        = 'ORDER_ALPH';      
+export const ORDER_BY_RATING   = 'ORDER_BY_RATING'; 
+export const FILTER_BY_GENRE   = 'FILTER_BY_GENRE';
+export const FILTER_BY_ORIGIN  = 'FILTER_BY_ORIGIN';
+export const FILTER_BY_WORD    = 'FILTER_BY_WORD';
+export const SET_FETCHING_MSG  = 'SET_INITIAL_STATE' 
+
+export function setFetchingMsg() {
+    return {
+        type: SET_FETCHING_MSG
+    }
+}
 
 export function getVideogames() {
-    return function (dispatch) {
+    return function (dispatch) {        
         return axios.get('http://localhost:3001/videogames')
                     .then(response => dispatch({
                         type: GET_VIDEOGAMES,
@@ -19,13 +26,13 @@ export function getVideogames() {
 }
 
 export function searchApi(payload) {
-    console.log(payload)
-    return async function (dispatch) {
-        return await axios.get(`http://localhost:3001/videogames?name=${payload}`)
+    return function (dispatch) {
+        dispatch(setFetchingMsg())
+        return axios.get(`http://localhost:3001/videogames?name=${payload}`)
         .then(response => dispatch({
             type: SEARCH_API,
             payload: response.data
-        }))
+        })).then(()=>console.log('Se despachó'))
     }
 }
 

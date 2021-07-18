@@ -5,7 +5,8 @@ import {
     ORDER_BY_RATING,
     FILTER_BY_GENRE,
     FILTER_BY_ORIGIN,
-    FILTER_BY_WORD
+    FILTER_BY_WORD,
+    SET_FETCHING_MSG
  } from "../actions/videogamesActions";
 
 export const INCREMENT = 'INCREMENT';
@@ -20,6 +21,10 @@ const initialState = {
 export default function videogamesReducer(state = initialState, { type, payload}) {
     let aux;
     switch (type) {
+        case SET_FETCHING_MSG: 
+            return {
+                videogames: 'CARGANDO'
+            }
         case GET_VIDEOGAMES: 
             payload.forEach(vg => {
                     vg.checkGenre  = true;
@@ -31,9 +36,11 @@ export default function videogamesReducer(state = initialState, { type, payload}
             };
         case SEARCH_API:
             payload.forEach(vg => {
-                vg.checkGenre = true;
-                vg.checkWord  = true;
+                vg.checkGenre  = true;
+                vg.checkWord   = true;
+                vg.checkOrigin = true;
             });
+            console.log(payload)
             return {
                 videogames: payload
             };

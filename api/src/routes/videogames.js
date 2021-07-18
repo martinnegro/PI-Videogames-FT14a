@@ -84,14 +84,10 @@ router.get('/', async (req, res) => {
                 vgs.push(vg);
             }
         }
+        console.log(vgs);
         res.json(vgs);
     }
 });
-//  GET /videogames?name="...":
-// Obtener un listado de las primeros 15 videojuegos que contengan la palabra ingresada como query parameter
-// Si no existe ningún videojuego mostrar un mensaje adecuado
-
-router
 
 
 module.exports = router;

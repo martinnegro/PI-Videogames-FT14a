@@ -27,12 +27,12 @@
                 margin: 5px;
                 h5 {
                     margin: 0;
-                    
+                    text-shadow: 0 0 10px black;
                 }
                 p {
                     margin: 0;
                     text-align: end;
-                    
+                    text-shadow: 0 0 10px black;
                 }
             }
         }
@@ -54,8 +54,8 @@
                 display: flex;
                 justify-content: space-around;
                 img {
-                    
                     width: 300px;
+                    height: auto;
                     margin: 10px;
                     border-radius: 5px;
                     box-shadow: 0 0 5px $main-grey;

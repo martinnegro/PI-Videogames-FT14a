@@ -1,3 +1,4 @@
+@import '../../variables';
 .container {
     color: white;
     background-color: black;
@@ -16,9 +17,13 @@
         display: flex;
         justify-content: space-around;
         align-items: baseline;
-
+        div {
+            &:hover {            
+                text-shadow: 0 0 5px $marker-blue;
+            }
+        }
         .title {
-            font-size: larger;
+            font-size: 1.25rem;
         }
     }
 }
