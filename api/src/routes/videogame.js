@@ -52,8 +52,7 @@ router.get('/:id', async (req, res, next) => {
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
 // Crea un videojuego en la base de datos
 router.post('/', async (req, res) => {  
-    const { name, description, released, rating, imgUrl, genres } = req.body;
-    console.log(req.body);
+    const { name, description, released, rating, imgUrl, genres, platforms } = req.body;
     const vg = await Videogame.create({
         id: uuidv4(),                           
         name,
@@ -63,6 +62,7 @@ router.post('/', async (req, res) => {
         imgUrl: imgUrl || null,
     })
     await vg.addGenre(genres);
+    await vg.addPlatform(platforms)
     res.json(vg);
 });
 

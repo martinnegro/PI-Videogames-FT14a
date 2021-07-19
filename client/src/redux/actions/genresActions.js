@@ -1,11 +1,10 @@
 import axios from 'axios';
 export const GET_GENRES = 'GET_GENRES';
-export const SET_CHECKED_GENRES = 'SET_CHECKED_GENRES';
+export const SET_ALL_GENRES_FALSE = 'SET_ALL_GENRES_FALSE'; 
 export const CHANGE_CHECKED_GENRES ='CHANGE_CHECKED_GENRES';
 
 export function getGenres() {
     return function (dispatch) {
-        console.log('GENRES')
         return axios.get('http://localhost:3001/genres')
                     .then(response => dispatch({
                             type: GET_GENRES,
@@ -13,12 +12,12 @@ export function getGenres() {
                     })).catch(err => console.log(err))
     }
 }
-
-export function setCheckedGenres() {
+export function setAllGenresFalse() {
     return {
-        type: SET_CHECKED_GENRES
+        type: SET_ALL_GENRES_FALSE
     }
 }
+
 
 export function changeCheckedGenres(payload) {
     return {

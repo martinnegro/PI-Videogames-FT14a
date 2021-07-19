@@ -1,8 +1,12 @@
 const { Router } = require('express');
 const router = Router();
 
-router.get('/', (req, res) => {
+const { Platform } = require('../db');
 
+router.get('/', async (req, res) => {
+    const response = await Platform.findAll();
+    res.json(response);
 });
+
 
 module.exports = router;

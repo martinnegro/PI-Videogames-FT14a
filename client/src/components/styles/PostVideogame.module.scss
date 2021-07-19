@@ -14,7 +14,7 @@
     .inputs {
         width: 300px;
         div {
-            margin: 10px 0 10px 0;
+            margin: 10px 0 0px 0;
             display: flex;
             flex-direction: column;
             div {
@@ -39,75 +39,87 @@
             }
         }
     }
-
-    .genresContainer {
+    .selectorsContainer {
+        width: 300px;
         display: flex;
-        flex-direction: column;
-        border:2px solid #ccc;
-        border-radius: 5px;
-        width:130px; height: 150px; 
-        overflow-y: scroll;
-        font-family: inherit;
-        font-size: small;
-        color: $main-background-color;
-    
-        background-color: $third-grey;
-        
-        .optionContainer {
+        justify-content: space-between;
+        margin: 0 0 10px 0;
+        span {
+            margin: 0 10px 0 0;
+            font-size: 0.7rem;
+            color: white;
+            @include bg-border-color-marker($marker-red + 25);
+            border: none;
+            border-radius: 2px;
+        }
+        .genresContainer {
             display: flex;
-            position: relative;
-            margin-bottom: 12px;
-            padding-left: 1.5rem;
-            margin: 1px 0 2px 2px;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;            
-            input {
-                position: absolute;
-                opacity: 0;
+            flex-direction: column;
+            border:2px solid #ccc;
+            border-radius: 5px;
+            width:130px; height: 150px; 
+            overflow-y: scroll;
+            font-family: inherit;
+            font-size: small;
+            color: $main-background-color;
+        
+            background-color: $third-grey;
+
+            .optionContainer {
+                display: flex;
+                position: relative;
+                margin-bottom: 12px;
+                padding-left: 1.5rem;
+                margin: 1px 0 2px 2px;
                 cursor: pointer;
-                height: 0;
-                width: 0;
-            }
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 1rem;
-                width: 1rem;
-                background-color: #eee;
-                border-radius: 2px;
-                transition: all 200ms ease;
-            }
-            &:hover input ~ .checkmark {
-                background-color: $marker-blue + 50;
-                box-shadow: 0 0 3px $marker-blue;
-            }
-            /* When the checkbox is checked, add a blue background */
-            & input:checked ~ .checkmark {
-              background-color: $marker-red + 25;
-              box-shadow: 0 0 3px $marker-red;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;            
+                input { 
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+                }
+                .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 1rem;
+                    width: 1rem;
+                    background-color: #eee;
+                    border-radius: 2px;
+                    transition: all 200ms ease;
+                }
+                &:hover input ~ .checkmark {
+                    background-color: $marker-blue + 50;
+                    box-shadow: 0 0 3px $marker-blue;
+                }
+                /* When the checkbox is checked, add a blue background */
+                & input:checked ~ .checkmark {
+                  background-color: $marker-red + 25;
+                  box-shadow: 0 0 3px $marker-red;
+                }
+
+                /* Style the checkmark/indicator */
+                & .checkmark:after {
+                  left: 9px;
+                  top: 5px;
+                  width: 5px;
+                  height: 10px;
+                  border: solid white;
+                  border-width: 0 3px 3px 0;
+                  -webkit-transform: rotate(45deg);
+                  -ms-transform: rotate(45deg);
+                  transform: rotate(45deg);
+                }
+
             }
 
-            /* Style the checkmark/indicator */
-            & .checkmark:after {
-              left: 9px;
-              top: 5px;
-              width: 5px;
-              height: 10px;
-              border: solid white;
-              border-width: 0 3px 3px 0;
-              -webkit-transform: rotate(45deg);
-              -ms-transform: rotate(45deg);
-              transform: rotate(45deg);
-            }
-            
         }
-        
     }
-    
     .hoverBorder {
         // flex-basis: 28%;
         box-sizing: border-box;

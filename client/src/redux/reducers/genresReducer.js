@@ -1,32 +1,34 @@
 
-import { GET_GENRES, SET_CHECKED_GENRES, CHANGE_CHECKED_GENRES } from '../actions/genresActions';
+import { GET_GENRES, CHANGE_CHECKED_GENRES, SET_ALL_GENRES_FALSE } from '../actions/genresActions';
+import { SET_ALL_PLATFORMS_FALSE } from '../actions/platformsActions';
 
 const initialState = {
     genres: [],
-    checkedGenres: [],
     selectedGenres: []
 }
 
 export default function genresReducer(state = initialState, { type, payload }) {
     switch (type) {
         case GET_GENRES:
+            payload.forEach(g => g.check = false);
             return {
                 ...state,
                 genres: payload
             }
-        case SET_CHECKED_GENRES:
-            const newCheck = new Array(state.genres.length).fill(false)
+        case SET_ALL_GENRES_FALSE:
+            aux = state.genres.slice();
+            aux.forEach(p => p.check = false);
             return {
-                ...state,
-                checkedGenres: newCheck
+                genres: aux,
+                selectedGenres: []
             }
         case CHANGE_CHECKED_GENRES:
-            const newState = state.checkedGenres.map((item, index)=> index === payload ? !item : item);
-            const selectedGenres = state.genres.filter((g, i) => newState[i]).map(g => g.id)
+            const aux = state.genres.slice();
+            aux.forEach(( g ) => parseInt(g.id) === parseInt(payload) ? g.check = !g.check : g.check = g.check );
+            
             return {
-                ...state,
-                checkedGenres: newState,
-                selectedGenres
+                genres: aux,
+                selectedGenres: aux.filter((g) => g.check)
             }
         default:
             return state

@@ -7,7 +7,8 @@ export const ORDER_BY_RATING   = 'ORDER_BY_RATING';
 export const FILTER_BY_GENRE   = 'FILTER_BY_GENRE';
 export const FILTER_BY_ORIGIN  = 'FILTER_BY_ORIGIN';
 export const FILTER_BY_WORD    = 'FILTER_BY_WORD';
-export const SET_FETCHING_MSG  = 'SET_INITIAL_STATE' 
+export const SET_FETCHING_MSG  = 'SET_INITIAL_STATE';
+export const SET_NETWORK       = 'SET_NETWORK'
 
 export function setFetchingMsg() {
     return {
@@ -17,17 +18,25 @@ export function setFetchingMsg() {
 
 export function getVideogames() {
     return function (dispatch) {        
-        return axios.get('http://localhost:3001/videogames')
-                    .then(response => dispatch({
+        dispatch(setFetchingMsg());
+        return fetch('http://localhost:3001/videogames',{ method: 'GET' })
+                    .then(r => r.json())
+                    .then(response => {
+                        console.log(response)
+                        dispatch({
                         type: GET_VIDEOGAMES,
-                        payload: response.data
+                        payload: response
+                        });
+                    }).catch(err => dispatch({
+                        type: SET_NETWORK,
+                        payload: err
                     }))
     }
 }
 
 export function searchApi(payload) {
     return function (dispatch) {
-        dispatch(setFetchingMsg())
+        dispatch(setFetchingMsg());
         return axios.get(`http://localhost:3001/videogames?name=${payload}`)
         .then(response => dispatch({
             type: SEARCH_API,

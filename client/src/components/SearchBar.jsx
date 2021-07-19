@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
+import { restoreValues } from '../redux/actions/inputsActions';
 import { searchApi }  from '../redux/actions/videogamesActions';
 
 function SearchBar(props) {
@@ -14,6 +15,7 @@ function SearchBar(props) {
     
     async function handleSubmit(e) {
         dispatch(searchApi(input));
+        dispatch(restoreValues())
         setInput('');
         e.preventDefault();
         if (history.location.pathname !== '/videogames') history.push('/videogames');

@@ -44,11 +44,11 @@
             }
             50%{
                 height: 1px;
-                width: calc(100%+1px);
+                width: calc(100%+2px);
             }
             100%{
-                height: calc(100% + 2px);
-                width: calc(100% + 1px);
+                height: calc(100% + 4px);
+                width: calc(100% + 2px);
             }
         }
         

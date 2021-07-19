@@ -6,7 +6,8 @@ import {
     FILTER_BY_GENRE,
     FILTER_BY_ORIGIN,
     FILTER_BY_WORD,
-    SET_FETCHING_MSG
+    SET_FETCHING_MSG,
+    SET_NETWORK
  } from "../actions/videogamesActions";
 
 export const INCREMENT = 'INCREMENT';
@@ -15,7 +16,8 @@ export const DECREMENT = 'DECREMENT';
 
 const initialState = {
     videogames: [],
-    selectedVideogames: []
+    isFetching: true,
+    network: {}
 }
 
 export default function videogamesReducer(state = initialState, { type, payload}) {
@@ -23,7 +25,8 @@ export default function videogamesReducer(state = initialState, { type, payload}
     switch (type) {
         case SET_FETCHING_MSG: 
             return {
-                videogames: 'CARGANDO'
+                ...state,
+                isFetching: true
             }
         case GET_VIDEOGAMES: 
             payload.forEach(vg => {
@@ -32,7 +35,8 @@ export default function videogamesReducer(state = initialState, { type, payload}
                     vg.checkOrigin = true;
                 });
             return {
-                videogames: payload
+                videogames: payload,
+                network: {}
             };
         case SEARCH_API:
             payload.forEach(vg => {
@@ -40,10 +44,16 @@ export default function videogamesReducer(state = initialState, { type, payload}
                 vg.checkWord   = true;
                 vg.checkOrigin = true;
             });
-            console.log(payload)
             return {
-                videogames: payload
+                videogames: payload,
+                network: {}
             };
+        case SET_NETWORK:
+            return {
+                ...state,
+                isFetching: false,
+                network: payload
+            }
         case ORDER_ALPH: 
             aux = state.videogames.slice();
             if (payload === INCREMENT) aux.sort((a, b) => a.name > b.name ? 1 : -1);

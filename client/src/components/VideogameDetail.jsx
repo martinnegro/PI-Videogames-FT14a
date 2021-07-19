@@ -10,7 +10,6 @@ function VideogameDetail({idDb}) {
         axios.get(`http://localhost:3001/videogame/${idDb}`)
         .then(res => {
             setVideogame(res.data);
-            
         })
         .catch((err) => {
             setError(err)
