@@ -21,8 +21,7 @@ export function getVideogames() {
         dispatch(setFetchingMsg());
         return fetch('http://localhost:3001/videogames',{ method: 'GET' })
                     .then(r => r.json())
-                    .then(response => {
-                        console.log(response)
+                    .then(response => { 
                         dispatch({
                         type: GET_VIDEOGAMES,
                         payload: response

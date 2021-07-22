@@ -6,25 +6,28 @@ const axios = require('axios');
 require('dotenv').config();
 const { v4: uuidv4 } = require('uuid');
 
-const { API_URL_GAMES, API_URL_GENRES,API_URL_PLATFORMS } = require('../../constants');
+const { API_URL_GAMES, API_URL_GENRES, API_URL_PLATFORMS } = require('../../constants');
 const { API_KEY } = process.env;
 
 // GET /videogames:
 // Obtener un listado de los primeras 15 videojuegos
 // Debe devolver solo los datos necesarios para la ruta principal
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     const { name } = req.query;
     if (!name) {
-        const vgs = await Videogame.findAll({
-            attributes: ['id','idRawg','name','rating','imgUrl'],
-            include: { 
-                model: Genre,
-                through: { attributes: [] } 
-             }
-        });
-        res.json(vgs);
+        Videogame.findAll(
+            {
+                attributes: ['id','idRawg','name','rating','imgUrl'],
+                include: { 
+                    model: Genre,
+                    through: { attributes: [] } 
+                }
+            }
+            ).then((vgs) => res.json(vgs))
+              .catch((err) => next(err))
     } else {
         // Busca Coincidencias en la DB
+    
         const vgs = await Videogame.findAll({
             where: {
                 name: {
@@ -84,7 +87,6 @@ router.get('/', async (req, res) => {
                 vgs.push(vg);
             }
         }
-        console.log(vgs);
         res.json(vgs);
     }
 });

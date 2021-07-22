@@ -2,14 +2,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import style from '../styles/PostVideogame.module.scss'
-import { getPlatforms, changeCheckedPlatforms,setAllPlatformsFalse } from '../../redux/actions/platformsActions';
+import { getPlatforms, changeCheckedPlatforms } from '../../redux/actions/platformsActions';
 
 function PlatformSelector() {
     const platforms = useSelector(state => state.platformsReducer.platforms);
     const dispatch = useDispatch();
     useEffect(()=>{
         if (platforms.length < 1) dispatch(getPlatforms());
-    },[])
+    },[dispatch, platforms])
     function handleCheckbox(e) {
         dispatch(changeCheckedPlatforms(e.target.value))    
     }

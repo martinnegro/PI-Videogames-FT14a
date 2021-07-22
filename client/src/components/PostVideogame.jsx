@@ -4,9 +4,9 @@ import { useHistory, withRouter } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAllPlatformsFalse } from '../redux/actions/platformsActions';
 import { setAllGenresFalse } from '../redux/actions/genresActions';
-import style from './styles/PostVideogame.module.scss'
+import style from './styles/PostVideogame.module.scss';
 import GenreSelector from './ForSelect/GenreSelector';
-import PlatformSelector from './ForSelect/PlatformSelector'
+import PlatformSelector from './ForSelect/PlatformSelector';
 
 
 const initialState = { 
@@ -19,12 +19,14 @@ const initialState = {
     platforms: []
 }
 
+
+
 function validate(input) {
     let errors = {};
     const { name, description, imgUrl, genres, platforms } = input
     if(!name) errors.name = 'El nombre es obligatorio';
     if(!description) errors.description = 'La descripción es obligatoria';
-    const pattern = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    const pattern = /(http:|https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/;
     if (!imgUrl) errors.imgUrl = 'La url de la imagen es obligatoria';
     else if (!pattern.test(imgUrl)) errors.imgUrl = 'No es una url válida';
     if (genres.length < 1 || genres.length > 5 ) errors.genres = 'Selecciona entre 1 y 5';
@@ -40,7 +42,7 @@ function PostVideogame() {
     const selectedGenres = useSelector(state => state.genresReducer.selectedGenres);
     const selectedPlatforms = useSelector(state => state.platformsReducer.selectedPlatforms)
     
-    const [ input, setInput ] = useState(initialState);
+    const [  input, setInput  ] = useState(initialState);
     const [ errors, setErrors ] = useState([{}]);
     const [ submit, setSubmit ] = useState(true);
     
@@ -94,20 +96,20 @@ function PostVideogame() {
                     <label>Nombre:</label>
                     <span>{errors.name}</span>
                     </div>
-                    <input type='text' name='name' value={input.name}/>
+                    <input type='text' name='name' defaultValue={input.name} placeholder='Nombre'/>
                 </div>
                 <div>
                     <div>
                     <label>Descripción:</label>
                     <span>{errors.description}</span>
                     </div>
-                    <input type='text' name='description' value={input.description}/>
+                    <input type='text' name='description' defaultValue={input.description} placeholder='Descripción'/>
                 </div>
                 <div>
                     <div>
                     <label>Lanzamiento:</label>
                     </div>
-                    <input type='text' name='released' value={input.released}/>
+                    <input type='text' name='released' defaultValue={input.released}/>
                 </div>
                 <div>
                     <div>
@@ -119,14 +121,14 @@ function PostVideogame() {
                         min='1'
                         max='5'
                         step='0.01'
-                        value={input.rating}/>
+                        defaultValue={input.rating}/>
                 </div>
                 <div>
                     <div>
                         <label>Imagen:</label>
                         <span>{errors.imgUrl}</span>
                     </div>
-                    <input type='text' name='imgUrl' value={input.imgUrl}/>
+                    <input type='text' name='imgUrl' defaultValue={input.imgUrl} placeholder='URL de una imagen'/>
                 </div>
             </form>
             <div className={style.selectorsContainer}>

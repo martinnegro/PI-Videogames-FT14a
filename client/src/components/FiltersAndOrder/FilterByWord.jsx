@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { filterByWord } from '../../redux/actions/videogamesActions';
 import { setInputWordFilter } from '../../redux/actions/inputsActions'
@@ -12,7 +12,7 @@ function FilterByWord() {
     }
     useEffect(() => {
         dispatch(filterByWord(input));
-    }, [input])
+    }, [input, dispatch])
 
     return (
         <div className={style.container}>

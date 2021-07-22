@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT
     },
     imgUrl: {
-      type: DataTypes.TEXT
+      type: DataTypes.STRING
     },
     imgUrlSec: {
       type: DataTypes.STRING

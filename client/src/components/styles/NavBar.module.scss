@@ -21,6 +21,9 @@
             &:hover {            
                 text-shadow: 0 0 5px $marker-blue;
             }
+            &:focus {
+                color: white;
+            }
         }
         .title {
             font-size: 1.25rem;

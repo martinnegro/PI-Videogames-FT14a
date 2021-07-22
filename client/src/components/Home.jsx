@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <div className={style.container}>
             <div className={style.title}>
-                <Link to='/videogames'><a>Ver videojuegos</a></Link>
+                <Link to='/videogames'>Ver videojuegos</Link>
             </div>
             <div className={style.title}>
                 <Link to='/postvideogame'>Agregar Videojuego</Link>

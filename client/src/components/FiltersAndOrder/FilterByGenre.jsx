@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByGenre } from '../../redux/actions/videogamesActions'
-import { getGenres } from '../../redux/actions/genresActions'
 import { setGenreFilter } from '../../redux/actions/inputsActions';
 
 import style from '../styles/FilterByGenre.module.scss'
@@ -13,12 +11,10 @@ function FilterByGenre() {
     const input  = useSelector(state => state.inputsReducer.genreFilter)
     const dispatch = useDispatch();
     
-    useEffect(()=>{
-        if (genres.length < 1) dispatch(getGenres());
-    },[])
+   
     useEffect(()=>{
         dispatch(filterByGenre(parseInt(input)));
-    },[input])
+    },[input, dispatch])
 
     function handleFilter(e) {
             dispatch(setGenreFilter(parseInt(e.target.value)));
@@ -26,9 +22,9 @@ function FilterByGenre() {
 
     return (
         <div className={style.container}>
-            <form onChange={handleFilter}>
+            <form >
                 <label>Filtrado por género:</label>
-                <select value={input}>
+                <select value={input} onChange={handleFilter}>
                     <option value='-1'>Ninguno</option>
                 {   genres.length > 1 ?  genres.map(genre => (
                         <option key={genre.id} value={genre.id}>{genre.name}</option>

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory, withRouter } from 'react-router-dom';
 import { restoreValues } from '../redux/actions/inputsActions';
 import { searchApi }  from '../redux/actions/videogamesActions';
+import style from './styles/SearchBar.module.scss'
 
 function SearchBar(props) {
     const [ input, setInput ] = useState('');
@@ -22,7 +23,7 @@ function SearchBar(props) {
     }
 
     return (
-        <div>
+        <div className={style.container}>
             <form onSubmit={handleSubmit}>
                 <input type='text' placeholder='Ingresa palabra clave...'
                         value={input} onChange={handleInput} /> 

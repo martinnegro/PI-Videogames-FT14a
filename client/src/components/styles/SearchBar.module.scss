@@ -1,0 +1,22 @@
+@import '../../variables';
+
+.container {
+    input {
+        @include input-text;
+        font-size: 1rem;
+    
+        &:focus ~ input {
+            transform: scale(1.05);
+        }
+    
+        &[type=submit] {
+            border-radius: 0 5px 5px 0;
+            border-color: $marker-red + 25;
+            background-color: $marker-red;
+            
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    }
+}

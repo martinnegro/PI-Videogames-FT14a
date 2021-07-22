@@ -14,19 +14,18 @@ function OrderByAlph() {
         dispatch(setSelectOrder(parseInt(e.target.value)))
     }
     useEffect(() => {
-        console.log('ENTRÓ?');
         const selected = parseInt(input);
         if ( selected === 1 ) dispatch(orderAlph(INCREMENT));
         if ( selected === 2 ) dispatch(orderAlph(DECREMENT));
         if ( selected === 3 ) dispatch(orderByRating(INCREMENT));
         if ( selected === 4 ) dispatch(orderByRating(DECREMENT));
-    },[input])
+    },[input, dispatch])
 
     return (
         <div className={style.container}>
-            <form onChange={handleOrder} className={style.form} >
+            <form  className={style.form} >
                 <label>Ordenado Alfabético:</label>
-                <select name='alphabet' value={input}>
+                <select name='alphabet' value={input} onChange={handleOrder}>
                     <option value={0}></option>
                     <option value={1}>A - Z</option>
                     <option value={2}>Z - A</option>

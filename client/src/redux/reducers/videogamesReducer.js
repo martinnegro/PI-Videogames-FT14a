@@ -74,7 +74,7 @@ export default function videogamesReducer(state = initialState, { type, payload}
         case FILTER_BY_GENRE:
             aux = state.videogames.slice()
             if (payload === -1) aux.forEach(vg => vg.checkGenre = true);
-            else aux.forEach(vg => vg.genres.some(g => g.id == payload) ? vg.checkGenre = true : vg.checkGenre = false);
+            else aux.forEach(vg => vg.genres.some(g => parseInt(g.id) === parseInt(payload)) ? vg.checkGenre = true : vg.checkGenre = false);
             return {
                 ...state,
                 videogames: aux,

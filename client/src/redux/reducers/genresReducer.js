@@ -1,6 +1,6 @@
 
 import { GET_GENRES, CHANGE_CHECKED_GENRES, SET_ALL_GENRES_FALSE } from '../actions/genresActions';
-import { SET_ALL_PLATFORMS_FALSE } from '../actions/platformsActions';
+
 
 const initialState = {
     genres: [],
@@ -8,6 +8,7 @@ const initialState = {
 }
 
 export default function genresReducer(state = initialState, { type, payload }) {
+    let aux;
     switch (type) {
         case GET_GENRES:
             payload.forEach(g => g.check = false);
@@ -23,8 +24,8 @@ export default function genresReducer(state = initialState, { type, payload }) {
                 selectedGenres: []
             }
         case CHANGE_CHECKED_GENRES:
-            const aux = state.genres.slice();
-            aux.forEach(( g ) => parseInt(g.id) === parseInt(payload) ? g.check = !g.check : g.check = g.check );
+            aux = state.genres.slice();
+            aux.forEach(( g ) => parseInt(g.id) === parseInt(payload) ? g.check = !g.check : g.check );
             
             return {
                 genres: aux,

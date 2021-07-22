@@ -14,7 +14,7 @@ function FilterByOrigin() {
 
     useEffect(()=>{
         dispatch(filterByOrigin(input))
-    },[input])
+    },[input, dispatch])
 
     function handleFilter(e) {
         dispatch(setOriginFilter(e.target.value))
@@ -22,9 +22,9 @@ function FilterByOrigin() {
 
     return (
         <div className={style.container}>
-            <form onChange={handleFilter}>
+            <form >
                 <label>Filtrado por origen:</label>
-                <select value={input}>
+                <select value={input} onChange={handleFilter}>
                     <option value='-1'>Ninguno</option>
                     <option value='API'>API</option>
                     <option value='USER'>Usuario</option>

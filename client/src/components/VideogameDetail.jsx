@@ -15,8 +15,8 @@ function VideogameDetail({idDb}) {
             setError(err)
             setVideogame('Hubo un problema en el servidor o no se encontró el videojuego.')
         })
-    },[])
-    console.log(videogame)
+    },[idDb])
+    
  
     function textRating({ rating }) {
         const ratingColor = {
@@ -76,8 +76,8 @@ function VideogameDetail({idDb}) {
                                 dangerouslySetInnerHTML={{ __html: videogame.description }}>
                             </div>
                             <div className={style.imgContainer}>
-                                <img src={videogame.imgUrl}/>
-                                <img src={videogame.imgUrlSec}/>
+                                <img src={videogame.imgUrl} alt={`First of ${videogame.name}`} />
+                                <img src={videogame.imgUrlSec} alt={`Second of ${videogame.name}`}/>
                             </div>
                         </div>
                         

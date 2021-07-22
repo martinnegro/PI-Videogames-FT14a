@@ -24,7 +24,7 @@ export default function platformsReducer(state = initialState, { type, payload }
             
         case CHANGE_CHECKED_PLATFORMS:
             aux = state.platforms.slice();
-            aux.forEach(( g ) => parseInt(g.id) === parseInt(payload) ? g.check = !g.check : g.check = g.check );
+            aux.forEach(( g ) => parseInt(g.id) === parseInt(payload) ? g.check = !g.check : g.check );
             return {
                 platforms: aux,
                 selectedPlatforms: aux.filter((g) => g.check)

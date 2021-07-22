@@ -11,7 +11,6 @@ import { restoreValues } from '../redux/actions/inputsActions';
 
 
 const Videogames = function() {
-    // Trae los juegos del redux
     const vgamesStore = useSelector((state) => state.videogamesReducer.videogames);
     const isFetching  = useSelector((state) => state.videogamesReducer.isFetching);
     const network     = useSelector((state) => state.videogamesReducer.network);
@@ -60,14 +59,14 @@ const Videogames = function() {
     function setElementPerPage(e) {
         if (vgames){
             const elementsPerPage = parseInt(e.target.value);
-            let currentPage = pagination.currentPage;
-            let newLast = Math.ceil(vgames.length / elementsPerPage);
-            if (e.target.value !== undefined){
-                if (currentPage > newLast ) currentPage = newLast;
+            // let currentPage = pagination.currentPage;
+            // let newLast = Math.ceil(vgames.length / elementsPerPage);
+            if (e.target.value) {
+                //if (currentPage > newLast ) currentPage = newLast;
                 setPagination({
                     ...pagination,
                     elementsPerPage,
-                    currentPage
+                    //currentPage
                 })
             }
         }

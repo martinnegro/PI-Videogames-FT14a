@@ -17,7 +17,7 @@ server.use(cookieParser());
 server.use(morgan('dev'));
 
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   // res.header('Access-Control-Allow-Origin', 'http://192.168.0.144:3000');
   res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -31,7 +31,7 @@ server.use('/', routes);
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
-  console.error(err);
+  console.log(`STATUS: ${status} -- MESSAGE: ${message}`)
   res.status(status).send(message);
   next()
 });

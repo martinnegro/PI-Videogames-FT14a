@@ -16,6 +16,12 @@ const { v4: uuidv4 } = require('uuid');
 // Obtener el detalle de un videojuego en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de videojuego
 // Incluir los géneros asociados
+router.get('/', (req, res, next) => {
+    const err = new Error('No id was passed')
+    err.status = 400
+    next(err)
+});
+
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -43,6 +49,8 @@ router.get('/:id', async (req, res, next) => {
                 }).catch(err => next(err))
         } else res.json(vg);
     } catch (err) {
+        err.status = 404;
+        err.message = 'Wrong id type.'
         next(err)
     }
 });
@@ -51,19 +59,25 @@ router.get('/:id', async (req, res, next) => {
 // POST /videogame:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de videojuego por body
 // Crea un videojuego en la base de datos
-router.post('/', async (req, res) => {  
+router.post('/', async (req, res, next) => {  
     const { name, description, released, rating, imgUrl, genres, platforms } = req.body;
-    const vg = await Videogame.create({
-        id: uuidv4(),                           
-        name,
-        description,
-        released: released || null,
-        rating: rating || null,
-        imgUrl: imgUrl || null,
-    })
-    await vg.addGenre(genres);
-    await vg.addPlatform(platforms)
-    res.json(vg);
+    if (!name || !description || !imgUrl || !genres || !platforms) {
+        const err = new Error('Missing parameters')
+        err.status = 400
+        next(err)
+    } else {
+        const vg = await Videogame.create({
+            id: uuidv4(),                           
+            name,
+            description,
+            released: released || null,
+            rating: rating || null,
+            imgUrl: imgUrl || null,
+        })
+        await vg.addGenre(genres);
+        await vg.addPlatform(platforms)
+        res.json(vg);
+    }
 });
 
 module.exports = router;
