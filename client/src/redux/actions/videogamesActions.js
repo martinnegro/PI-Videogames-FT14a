@@ -20,7 +20,7 @@ export function setFetchingMsg() {
 export function getVideogames() {
     return function (dispatch) {        
         dispatch(setFetchingMsg());
-        return fetch(`/videogames`,{ method: 'GET' })
+        return fetch(`/api/videogames`,{ method: 'GET' })
                     .then(r => r.json())
                     .then(response => { 
                         dispatch({
@@ -37,11 +37,11 @@ export function getVideogames() {
 export function searchApi(payload) {
     return function (dispatch) {
         dispatch(setFetchingMsg());
-        return axios.get(`/videogames?name=${payload}`)
+        return axios.get(`/api/videogames?name=${payload}`)
         .then(response => dispatch({
             type: SEARCH_API,
             payload: response.data
-        })).then(()=>console.log('Se despachó'))
+        })).catch((err)=>console.log(err))
     }
 }
 

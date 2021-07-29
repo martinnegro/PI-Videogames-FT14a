@@ -80,7 +80,7 @@ function PostVideogame() {
     // POST /videogame
     let history = useHistory();
     async function handleSubmit(e) {
-        axios.post('http://localhost:3001/videogame',input)
+        axios.post('/api/videogame',input)
             .then(response => history.push(`/videogame/${response.data.id}`))
             .catch(err => alert('No se pudo realizar el posteo :('))
         setInput(initialState);

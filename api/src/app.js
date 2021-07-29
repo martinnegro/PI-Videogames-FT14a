@@ -24,7 +24,7 @@ server.use(morgan('dev'));
 //   next();
 // });
 server.use(cors({origin: 'http://localhost:3000'}));
-server.use('/', routes);
+server.use('/api', routes);
 
 server.use((err, req, res, next) => { 
   const status = err.status || 500;
