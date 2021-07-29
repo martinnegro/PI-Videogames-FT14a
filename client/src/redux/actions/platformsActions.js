@@ -5,7 +5,7 @@ export const SET_ALL_PLATFORMS_FALSE = 'SET_ALL_PLATFORMS_FALSE';
 
 export function getPlatforms() {
     return function (dispatch) {
-        return axios.get('http://localhost:3001/platforms')
+        return axios.get('/platforms')
                     .then(response => dispatch({
                             type: GET_PLATFORMS,
                             payload: response.data

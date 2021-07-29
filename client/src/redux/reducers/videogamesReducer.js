@@ -91,7 +91,7 @@ export default function videogamesReducer(state = initialState, { type, payload}
             }    
         case FILTER_BY_ORIGIN:
             aux = state.videogames.slice()
-            if (payload === -1  ) aux.forEach(vg => vg.checkOrigin = true);
+            if (parseInt(payload) === -1  ) aux.forEach(vg => vg.checkOrigin = true);
             if (payload === 'API' ) aux.forEach(vg =>  vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
             if (payload === 'USER') aux.forEach(vg => !vg.idRawg ? vg.checkOrigin = true : vg.checkOrigin = false);
             return {

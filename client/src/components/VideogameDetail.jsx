@@ -7,7 +7,7 @@ function VideogameDetail({idDb}) {
     const [ videogame, setVideogame ] = useState();
     const [ error, setError ] = useState();
     useEffect(() => {   
-        axios.get(`http://localhost:3001/videogame/${idDb}`)
+        axios.get(`/videogame/${idDb}`)
         .then(res => {
             setVideogame(res.data);
         })

@@ -1,4 +1,5 @@
 import axios from 'axios';
+require('dotenv').config();
 
 export const GET_VIDEOGAMES    = 'GET_VIDEOGAMES';
 export const SEARCH_API        = 'SEARCH_API';
@@ -19,7 +20,7 @@ export function setFetchingMsg() {
 export function getVideogames() {
     return function (dispatch) {        
         dispatch(setFetchingMsg());
-        return fetch('http://localhost:3001/videogames',{ method: 'GET' })
+        return fetch(`/videogames`,{ method: 'GET' })
                     .then(r => r.json())
                     .then(response => { 
                         dispatch({
@@ -36,7 +37,7 @@ export function getVideogames() {
 export function searchApi(payload) {
     return function (dispatch) {
         dispatch(setFetchingMsg());
-        return axios.get(`http://localhost:3001/videogames?name=${payload}`)
+        return axios.get(`/videogames?name=${payload}`)
         .then(response => dispatch({
             type: SEARCH_API,
             payload: response.data

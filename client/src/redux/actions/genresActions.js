@@ -5,7 +5,7 @@ export const CHANGE_CHECKED_GENRES ='CHANGE_CHECKED_GENRES';
 
 export function getGenres() {
     return function (dispatch) {
-        return axios.get('http://localhost:3001/genres')
+        return axios.get('/genres')
                     .then(response => dispatch({
                             type: GET_GENRES,
                             payload: response.data

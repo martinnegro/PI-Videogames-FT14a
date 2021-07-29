@@ -82,6 +82,7 @@ function PostVideogame() {
     async function handleSubmit(e) {
         axios.post('http://localhost:3001/videogame',input)
             .then(response => history.push(`/videogame/${response.data.id}`))
+            .catch(err => alert('No se pudo realizar el posteo :('))
         setInput(initialState);
         dispatch(setAllPlatformsFalse());
         dispatch(setAllGenresFalse())

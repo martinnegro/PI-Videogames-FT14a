@@ -24,13 +24,13 @@ function OrderByAlph() {
     return (
         <div className={style.container}>
             <form  className={style.form} >
-                <label>Ordenado Alfabético:</label>
+                <label>Ordenar:</label>
                 <select name='alphabet' value={input} onChange={handleOrder}>
                     <option value={0}></option>
                     <option value={1}>A - Z</option>
                     <option value={2}>Z - A</option>
-                    <option value={3}>Menor a Mayor</option>
-                    <option value={4}>Mayor a Menor</option>
+                    <option value={3}>Menor a Mayor Rating</option>
+                    <option value={4}>Mayor a Menor Rating</option>
                 </select>
             </form>
         </div>

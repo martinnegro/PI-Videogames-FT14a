@@ -11,24 +11,22 @@ const server = express();
 
 server.name = 'API';
 
+
+
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
-
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.header('Access-Control-Allow-Origin', 'http://192.168.0.144:3000');
-  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-});
-
+// server.use(cors({credentials: true}))
+// server.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://192.168.0.144:3000"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+server.use(cors({origin: 'http://localhost:3000'}));
 server.use('/', routes);
 
-// Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+server.use((err, req, res, next) => { 
   const status = err.status || 500;
   const message = err.message || err;
   console.log(`STATUS: ${status} -- MESSAGE: ${message}`)
