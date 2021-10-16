@@ -1,11 +1,15 @@
 import axios from 'axios';
+const { REACT_APP_API_URL } = process.env;
+
+console.log(REACT_APP_API_URL)
+
 export const GET_PLATFORMS = 'GET_PLATFORMS';
 export const CHANGE_CHECKED_PLATFORMS ='CHANGE_CHECKED_PLATFORMS';
 export const SET_ALL_PLATFORMS_FALSE = 'SET_ALL_PLATFORMS_FALSE'; 
 
 export function getPlatforms() {
     return function (dispatch) {
-        return axios.get('/api/platforms')
+        return axios.get(`${REACT_APP_API_URL}/api/platforms`)
                     .then(response => dispatch({
                             type: GET_PLATFORMS,
                             payload: response.data

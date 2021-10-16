@@ -1,5 +1,6 @@
 import axios from 'axios';
-require('dotenv').config();
+
+const { REACT_APP_API_URL } = process.env
 
 export const GET_VIDEOGAMES    = 'GET_VIDEOGAMES';
 export const SEARCH_API        = 'SEARCH_API';
@@ -20,7 +21,7 @@ export function setFetchingMsg() {
 export function getVideogames() {
     return function (dispatch) {        
         dispatch(setFetchingMsg());
-        return fetch(`/api/videogames`,{ method: 'GET' })
+        return fetch(`${REACT_APP_API_URL}/api/videogames`,{ method: 'GET' })
                     .then(r => r.json())
                     .then(response => { 
                         dispatch({
@@ -37,7 +38,7 @@ export function getVideogames() {
 export function searchApi(payload) {
     return function (dispatch) {
         dispatch(setFetchingMsg());
-        return axios.get(`/api/videogames?name=${payload}`)
+        return axios.get(`${REACT_APP_API_URL}/api/videogames?name=${payload}`)
         .then(response => dispatch({
             type: SEARCH_API,
             payload: response.data

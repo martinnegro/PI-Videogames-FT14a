@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
 import style from './styles/VideogameDetail.module.scss'
+const { REACT_APP_API_URL } = process.env
+
 
 function VideogameDetail({idDb}) {
     const [ videogame, setVideogame ] = useState();
     const [ error, setError ] = useState();
     useEffect(() => {   
-        axios.get(`/api/videogame/${idDb}`)
+        axios.get(`${REACT_APP_API_URL}/api/videogame/${idDb}`)
         .then(res => {
             setVideogame(res.data);
         })
