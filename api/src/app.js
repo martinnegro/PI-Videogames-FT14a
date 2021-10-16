@@ -23,7 +23,7 @@ server.use(morgan('dev'));
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
-server.use(cors({origin: 'http://localhost:3000'}));
+server.use(cors());
 server.use('/api', routes);
 
 server.use((err, req, res, next) => { 
