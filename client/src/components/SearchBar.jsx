@@ -19,7 +19,7 @@ function SearchBar(props) {
         dispatch(restoreValues())
         setInput('');
         e.preventDefault();
-        if (history.location.pathname !== '/videogames') history.push('/videogames');
+        if (history.location.pathname !== '/site/videogames') history.push('/site/videogames');
     }
 
     return (

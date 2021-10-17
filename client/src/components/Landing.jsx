@@ -19,9 +19,10 @@ function Landing () {
                     WebkitMaskPositionY: y - 125 + 'px', 
                     maskPositionY: y - 125 + 'px',
                 })
-            } 
-        document.addEventListener('mousemove',trackMousePos)
-        return window.removeEventListener('mousemove',trackMousePos)
+            }
+        const event = 'ontouchstart' in window ? 'touchmove' : 'mousemove'
+        document.addEventListener(event,trackMousePos)
+        return window.removeEventListener(event,trackMousePos)
     },[])
 
     return (
