@@ -10,7 +10,7 @@ function VideogameCard({vg}) {
 
     return (
         <div className={style.container} style={imgBack}>
-            <Link to={`/videogame/${vg.id}`} className={style.linking}>
+            <Link to={`/site/videogame/${vg.id}`} className={style.linking}>
                 <div className={style.textContainer}>
                     <div className={style.genresContainer}>
                         {vg.genres.map(genre => <span key={genre.id} className={style.genres}>{genre.name}</span>)}

@@ -1,0 +1,33 @@
+.supra{
+    background-image: url('../../imgs/gamepad-white.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: none;
+    .container {
+        width: 100vw;
+        height: 100vh;
+        background-image: url('../../imgs/gamepad-color.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+
+        -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 30%, rgba(255,255,255,0) 70%);
+        mask-image: radial-gradient(circle at 50% 50%, rgba(0,0,0,1) 30%, rgba(255,255,255,0) 70%);
+        mask-repeat: no-repeat;
+        -webkit-mask-repeat: no-repeat;
+        mask-size: 250px 250px;
+        -webkit-mask-size: 250px 250px;
+
+        display: grid;
+        place-items: center;
+        
+        a {
+            font-size: 1.7rem;
+            position: absolute;
+            top: 40%;
+            background-color: grey;
+            padding: 2px 10px 2px 10px;
+            border-radius: 5px;
+
+        }
+    }
+}

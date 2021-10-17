@@ -6,10 +6,10 @@ export default function Home() {
     return (
         <div className={style.container}>
             <div className={style.title}>
-                <Link to='/videogames'>Ver videojuegos</Link>
+                <Link to='/site/videogames'>Ver videojuegos</Link>
             </div>
             <div className={style.title}>
-                <Link to='/postvideogame'>Agregar Videojuego</Link>
+                <Link to='/site/postvideogame'>Agregar Videojuego</Link>
             </div>
         </div>
     )
