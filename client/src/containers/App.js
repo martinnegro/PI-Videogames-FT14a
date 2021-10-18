@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getVideogames } from '../redux/actions/videogamesActions';
@@ -8,7 +8,6 @@ import './App.scss'
 
 import Landing from '../components/Landing';
 import NavBar from '../components/NavBar'
-import Home from '../components/Home';
 import Videogames from '../components/Videogames';
 import VideogameDetail from '../components/VideogameDetail';
 import PostVideogame from '../components/PostVideogame';

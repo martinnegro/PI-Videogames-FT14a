@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import style from './styles/Landing.module.scss'
 
@@ -9,13 +9,10 @@ function Landing () {
     })
 
     useEffect(()=>{
-        console.log(window)
         const trackMousePos = 
             (value)=>{
-                let x = value.clientX || value.touches[0].clientX;
-                let y = value.clientY || value.touches[0].clientY;
-                
-                value.preventDefault()
+                let x = value.clientX;
+                let y = value.clientY;
                 return setMousePos({
                     WebkitMaskPositionX: x - 125 + 'px', 
                     maskPositionX: x - 125 + 'px',
@@ -23,9 +20,9 @@ function Landing () {
                     maskPositionY: y - 125 + 'px',
                 })
             }
-        const event = 'ontouchstart' in window ? 'touchmove' : 'mousemove';
-        document.addEventListener(event,trackMousePos)
-        return () => document.removeEventListener(event,trackMousePos);
+        
+        document.addEventListener('mousemove',trackMousePos)
+        return () => document.removeEventListener('mousemove',trackMousePos);
     },[])
 
     return (

@@ -8,6 +8,10 @@
         background-position: center;
         background-repeat: no-repeat;
         cursor: none;
+
+        @media (max-width: 599px) {
+            background-image: none;
+        }
         
         .container {
            
@@ -24,6 +28,10 @@
 
             display: grid;
             place-items: center;
+            @media (max-width: 599px) {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
 
             a {
                 font-size: clamp(1rem, 1.5rem, 1.7rem);
