@@ -9,10 +9,13 @@ function Landing () {
     })
 
     useEffect(()=>{
+        console.log(window)
         const trackMousePos = 
             (value)=>{
-                let x = value.clientX;
-                let y = value.clientY;
+                let x = value.clientX || value.touches[0].clientX;
+                let y = value.clientY || value.touches[0].clientY;
+                
+                value.preventDefault()
                 return setMousePos({
                     WebkitMaskPositionX: x - 125 + 'px', 
                     maskPositionX: x - 125 + 'px',
@@ -20,24 +23,22 @@ function Landing () {
                     maskPositionY: y - 125 + 'px',
                 })
             }
-        const event = 'ontouchstart' in window ? 'touchmove' : 'mousemove'
+        const event = 'ontouchstart' in window ? 'touchmove' : 'mousemove';
         document.addEventListener(event,trackMousePos)
-        return window.removeEventListener(event,trackMousePos)
+        return () => document.removeEventListener(event,trackMousePos);
     },[])
 
     return (
-        <div className={style.supra}>
-
-            <div 
-                className={style.cursor}
-                ></div>
-            <div 
-                className={style.container}
-                style={mousePos}
-            >
-                <Link to='/site/videogames'>
-                    START
-                </Link>
+        <div className={style.container}>
+            <div className={style.supra}>
+                <div 
+                    className={style.container}
+                    style={mousePos}
+                >
+                    <Link to='/site/videogames'>
+                        START
+                    </Link>
+                </div>
             </div>
         </div>
     )
